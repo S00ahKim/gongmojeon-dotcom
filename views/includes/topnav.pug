@@ -8,18 +8,18 @@
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
           li.nav-item
-            a.nav-link(href="/questions") Questions
+            a.nav-link(href="/sections") 분야별 보기
           li.nav-item
-            a.nav-link(href="/users") Users
+            a.nav-link(href="/status") 기한별 보기
+
           if (!currentUser) 
             li.nav-item
-              a.nav-link(href='/signin') Signin
+              a.nav-link(href='/signin') 로그인
             li.nav-item
-              a.nav-link(href='/users/new') Signup
+              a.nav-link(href='/users/new') 회원가입
           else
             li.nav-item
-              a.nav-link(href=`/users/${currentUser._id}`) My Profile
+              a.nav-link(href=`/users/${currentUser._id}`) 마이페이지
             li.nav-item
-              a.nav-link(href='/signout') Signout
-        
+              a.nav-link(href='/signout') 회원탈퇴
           

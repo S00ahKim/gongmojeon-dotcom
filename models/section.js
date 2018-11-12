@@ -1,3 +1,4 @@
+// 분야별 보기를 위한 DB
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;

@@ -72,6 +72,8 @@ app.use(function(req, res, next) {
 // Route
 app.use('/', index);
 app.use('/users', users);
+app.use('/sections', sections);
+app.use('/status', status);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

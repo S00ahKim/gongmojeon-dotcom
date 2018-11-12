@@ -1,0 +1,28 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/status', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+
+    h1.main-title 
+      | 상태별 공모전
+      if status.total > 0
+        .small Total #{status.total} question(s)
+
+    if status.total <= 0 
+      .alert.alert-info No status available yet
+    else
+      .status
+        each question in status.docs
+          .question
+            a.title(href=`/status/${question.id}`)= question.title
+            include _question
+
+      +paginate(status, '/status', query)
+
+    hr
+    a.btn.btn-primary(href='/status/new') Ask Question

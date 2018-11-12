@@ -1,0 +1,28 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/sections', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+
+    h1.main-title 
+      | 분야별 공모전
+      if sections.total > 0
+        .small Total #{sections.total} question(s)
+
+    if sections.total <= 0 
+      .alert.alert-info No sections available yet
+    else
+      .sections
+        each question in sections.docs
+          .question
+            a.title(href=`/sections/${question.id}`)= question.title
+            include _question
+
+      +paginate(sections, '/sections', query)
+
+    hr
+    a.btn.btn-primary(href='/sections/new') Ask Question
