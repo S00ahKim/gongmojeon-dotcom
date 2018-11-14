@@ -1,8 +1,11 @@
+// TABLE NAME : USER (about user information)
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const Schema = mongoose.Schema;
 
+/* DB schema
+  (이름, 이메일(PK), 비밀번호, 페이스북 정보)*/
 var schema = new Schema({
   name: {type: String, required: true, trim: true},
   email: {type: String, required: true, index: true, unique: true, trim: true},
