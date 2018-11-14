@@ -83,14 +83,14 @@ a:hover {
   font-size: 1rem;
   color: #bbb; }
 
-.question {
+.comp_info {
   line-height: 160%;
   margin-bottom: 1em; }
-  .question .title {
+  .comp_info .title {
     font-size: 1.3rem; }
-  .question .content {
+  .comp_info .content {
     color: #aaa; }
-  .question .tags {
+  .comp_info .tags {
     margin: 0.5em 0; }
 
 .author {
@@ -107,7 +107,7 @@ a:hover {
   font-weight: bold;
   color: #0f5ca6; }
 
-.questions .content {
+.comp_infos .content {
   max-height: 5em;
   overflow: hidden;
   text-overflow: ellipsis; }
@@ -118,18 +118,18 @@ a:hover {
 .show .buttons {
   margin: 1em 0; }
 
-.show .answer {
+.show .comment {
   position: relative;
   margin-bottom: 1em; }
-  .show .answer .like-badge {
+  .show .comment .like-badge {
     text-align: center;
     padding: 0.5em;
     position: absolute; }
-    .show .answer .like-badge .button {
+    .show .comment .like-badge .button {
       font-size: 0.8em; }
-  .show .answer .card-body {
+  .show .comment .card-body {
     padding-left: 4em; }
-  .show .answer .content {
+  .show .comment .content {
     margin-bottom: 0.5em;
     color: #bbb; }
 

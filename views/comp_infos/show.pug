@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= comp_info.title
+
+    .comp_info.show
+      include _comp_info
+
+      .buttons
+        button.btn.btn-primary #[i.fa.fa-thumbs-up] 좋아요
+        | 
+        a.btn.btn-outline-secondary(href=`/comp_infos/${comp_info.id}/edit`) 수정
+        | 
+        a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/comp_infos/${comp_info.id}?_method=delete`) 삭제
+      
+    if comp_info.numcomments > 0
+      hr
+      h3 #{comp_info.numComments} 댓글수
+      .comments.show
+        each comment in comments
+          include _comment
+
+    form(action=`/comp_infos/${comp_info.id}/comments`, method='POST')
+      .form-group
+        label(for='comment') 댓글 작성하기
+        textarea.form-control(name="content", rows="5")
+      button.btn.btn-primary(type="submit") 댓글 등록하기
+
+  script.
+    $(function() {
+      $('.delete-btn').click(function() {
+        if (confirm('정말 삭제하시겠습니까?')) {
+          location = $(this).data('url');
+        }
+        return false;
+      });
+    });

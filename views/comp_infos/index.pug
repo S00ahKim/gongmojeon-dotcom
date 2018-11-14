@@ -1,0 +1,28 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/comp_infos', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+
+    h1.main-title 
+      | 공모전 모아보기
+      if comp_infos.total > 0
+        .small 총 #{comp_infos.total} 개의 공모전이 기다리고 있습니다.
+
+    if comp_infos.total <= 0 
+      .alert.alert-info 등록된 공모전이 없습니다
+    else
+      .comp_infos
+        each comp_info in comp_infos.docs
+          .comp_info
+            a.title(href=`/comp_infos/${comp_info.id}`)= comp_info.title
+            include _comp_info
+
+      +paginate(comp_infos, '/comp_infos', query)
+
+    hr
+    a.btn.btn-primary(href='/comp_infos/new') 새 공모전 등록하기

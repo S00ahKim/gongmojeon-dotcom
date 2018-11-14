@@ -1,0 +1,17 @@
+.content= comp_info.content
+.tags.badges
+  each tag in comp_info.tags
+    span.badge.badge-phill.badge-secondary= tag
+    | 
+.row
+  .col-sm
+    .numbers.
+      #[span.number.num-votes= comp_info.numLikes] 좋아요,
+      #[span.number.num-comments= comp_info.numcomments] 댓글,
+      #[span.number.num-views= comp_info.numReads] 조회수
+  .col-sm
+    .author
+      | 작성시간 #{moment(comp_info.createdAt).format('YYYY-MM-DD')}
+      if comp_info.author
+        | 
+        | by #[a(href=`/users/${comp_info.author.id}`)= comp_info.author.name] 

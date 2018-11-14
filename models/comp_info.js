@@ -12,7 +12,7 @@ var schema = new Schema({
   content: {type: String, trim: true, required: true},
   tags: [String],
   numLikes: {type: Number, default: 0},
-  numComment: {type: Number, default: 0},
+  numComments: {type: Number, default: 0},
   numReads: {type: Number, default: 0},
   host: {type: String, trim:true, required: true},
   manager: {type: String, trim:true, required: true},
