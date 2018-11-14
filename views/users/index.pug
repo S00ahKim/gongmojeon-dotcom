@@ -2,14 +2,14 @@ extends ../layout
 
 block content
   .container
-    h1.main-title Users
+    h1.main-title 마이페이지
     
     table.table.table-hover
       thead
         tr
-          th Name
-          th Email
-          th Created At
+          th 이름
+          th 이메일
+          th 가입일자
           th
       tbody
         each user in users
@@ -20,8 +20,8 @@ block content
             td= moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td
               a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/edit`) 
-                | #[i.fa.fa-pencil] Edit
+                | #[i.fa.fa-pencil] 수정하기
               | 
               a.btn.btn-sm.btn-outline-danger(href=`/users/${user._id}?_method=DELETE`)
-                | #[i.fa.fa-trash] Delete
-    a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] Register a new user
+                | #[i.fa.fa-trash] 삭제하기
+    a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] 새 사용자 등록하기

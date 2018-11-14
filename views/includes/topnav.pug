@@ -8,9 +8,7 @@
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
           li.nav-item
-            a.nav-link(href="/sections") 분야별 보기
-          li.nav-item
-            a.nav-link(href="/status") 기한별 보기
+            a.nav-link(href="/comp_infos") 모아보기
 
           if (!currentUser) 
             li.nav-item
@@ -21,5 +19,5 @@
             li.nav-item
               a.nav-link(href=`/users/${currentUser._id}`) 마이페이지
             li.nav-item
-              a.nav-link(href='/signout') 회원탈퇴
+              a.nav-link(href='/signout') 로그아웃
           

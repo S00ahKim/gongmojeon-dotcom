@@ -1,27 +1,28 @@
 extends layout
 
+//- 로그인
 block content
   .container
     .clearfix
       form.form-signin(action='/signin', method='POST')
-        h3.form-signin-heading Signin
-        label.sr-only(for='email') Email address
+        h3.form-signin-heading 로그인
+        label.sr-only(for='email') 이메일
         input(
           type='email', id='email', name='email', class='form-control', 
           placeholder='Email address', required, autofocus
         )
-        label.sr-only(for='password') Password
+        label.sr-only(for='password') 비밀번호
         input(
           type='password', id='password', name='password', class='form-control', 
           placeholder='Password', required, autofocus
         )
-        button.btn.btn-primary.btn-block(type='submit') Signin
+        button.btn.btn-primary.btn-block(type='submit') 로그인
         hr
         a.btn.btn-dark.btn-block(href='/auth/facebook')
           i.fa.fa-facebook.fa-lg
           | &nbsp;
-          | Signin with Facebook
+          | 페이스북으로 로그인하기
 
         div.sub 
-          a(href='/users/new') Signup
+          a(href='/users/new') 회원가입
           
