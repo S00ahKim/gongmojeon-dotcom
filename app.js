@@ -27,8 +27,8 @@ app.locals.querystring = require('querystring');
 // mongodb connect
 mongoose.Promise = global.Promise;
 
-// DB name
-const connStr = 'mongodb://localhost/comp_info'; 
+// DB name - 이름수정
+const connStr = 'mongodb://localhost/comp_infos'; 
 mongoose.connect(connStr, {useMongoClient: true });
 mongoose.connection.on('error', console.error);
 
