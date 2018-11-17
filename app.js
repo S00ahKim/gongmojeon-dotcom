@@ -28,7 +28,7 @@ app.locals.querystring = require('querystring');
 mongoose.Promise = global.Promise;
 
 // DB name -- 1116: 로그인이 안 되는 오류 있음.
-const connStr = 'mongodb://localhost/comp_infos'; 
+const connStr = 'mongodb://admin:26:adminpw26@/comp_infos'; 
 mongoose.connect(connStr, {useMongoClient: true });
 mongoose.connection.on('error', console.error);
 
@@ -64,8 +64,14 @@ app.use(sassMiddleware({
 // Public dir service as static status
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Passport initiate
+app.use(passport.initialize());
+app.use(passport.session());
+passportConfig(passport);
+
+// pug_local : user info + flash msg 전달
 app.use(function(req, res, next) {
-  res.locals.currentUser = req.session.user;
+  res.locals.currentUser = req.session.user; // passport는 req.user로 user정보 전달
   res.locals.flashMessages = req.flash();
   next();
 });
@@ -74,10 +80,17 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 app.use('/comp_infos', comp_infos);
+require('./routes/auth')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+});
+
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler
