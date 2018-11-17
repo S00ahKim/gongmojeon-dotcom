@@ -27,7 +27,7 @@ app.locals.querystring = require('querystring');
 // mongodb connect
 mongoose.Promise = global.Promise;
 
-// DB name - 이름수정
+// DB name -- 1116: 로그인이 안 되는 오류 있음.
 const connStr = 'mongodb://localhost/comp_infos'; 
 mongoose.connect(connStr, {useMongoClient: true });
 mongoose.connection.on('error', console.error);
