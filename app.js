@@ -27,8 +27,8 @@ app.locals.querystring = require('querystring');
 // mongodb connect
 mongoose.Promise = global.Promise;
 
-// DB name -- 1116: 로그인이 안 되는 오류 있음.
-const connStr = 'mongodb://admin:26:adminpw26@/comp_infos'; 
+// DB name -- 1117: mLab 아닌 Atlas로 접속.
+const connStr = 'mongodb://admin26:adminpw26@cluster0-shard-00-00-s36ax.mongodb.net:27017,cluster0-shard-00-01-s36ax.mongodb.net:27017,cluster0-shard-00-02-s36ax.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true'; 
 mongoose.connect(connStr, {useMongoClient: true });
 mongoose.connection.on('error', console.error);
 
@@ -83,10 +83,6 @@ app.use('/comp_infos', comp_infos);
 require('./routes/auth')(app, passport);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
