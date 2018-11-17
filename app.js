@@ -9,10 +9,13 @@ var session = require('express-session');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
 var mongoose   = require('mongoose');
+var passport = require('passport');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var comp_infos = require('./routes/comp_infos');
+
+var passportConfig = require('./lib/passport-config');
 
 var app = express();
 
