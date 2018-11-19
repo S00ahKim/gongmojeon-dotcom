@@ -1,8 +1,9 @@
-// TABLE NAME : COMP_INFO (about competition_info)
+// TABLE NAME : COMP_INFO (공모전 정보)
+
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
- 
+
 /* DB schema
   (공모전 정보의 스키마: 글쓴이, 글제목, 본문(공모요강을 써야 할 부분/UI에서 언급필요), 
   태그, 좋아요수, 댓글수, 조회수, 주최사, 담당자, 연락처, 홍보용이미지, 참고할 정보(선택입력/기타정보해당))*/
@@ -26,6 +27,6 @@ var schema = new Schema({
 });
 
 schema.plugin(mongoosePaginate);
-var comp_info = mongoose.model('comp_info', schema);
+var Comp_info = mongoose.model('Comp_info', schema);
 
-module.exports = comp_info;
+module.exports = Comp_info;

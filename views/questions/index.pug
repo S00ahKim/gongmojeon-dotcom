@@ -9,12 +9,12 @@ block content
       input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
 
     h1.main-title 
-      | 공모전 모아보기
+      | 공모전 정보
       if comp_infos.total > 0
-        .small 총 #{comp_infos.total} 개의 공모전이 기다리고 있습니다.
+        .small 총 #{comp_infos.total} 개의 공모전
 
     if comp_infos.total <= 0 
-      .alert.alert-info 등록된 공모전이 없습니다
+      .alert.alert-info 조회 가능한 공모전이 없습니다.
     else
       .comp_infos
         each comp_info in comp_infos.docs
@@ -25,4 +25,4 @@ block content
       +paginate(comp_infos, '/comp_infos', query)
 
     hr
-    a.btn.btn-primary(href='/comp_infos/new') 새 공모전 등록하기
+    a.btn.btn-primary(href='/comp_infos/new') 글쓰기

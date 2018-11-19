@@ -1,27 +1,27 @@
-var express = require('express'),
-  User = require('../models/user');
+var express = require('express');
+var User = require('../models/user');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: '공모전닷컴'});
+  res.render('index');
 });
 
 router.get('/signin', function(req, res, next) {
   res.render('signin');
 });
 
-// 09-1. Session 참고: 세션을 이용한 로그인
+// login using Session
 router.post('/signin', function(req, res, next) {
   User.findOne({email: req.body.email}, function(err, user) {
     if (err) {
       res.render('error', {message: "Error", error: err});
     } else if (!user || user.password !== req.body.password) {
-      req.flash('danger', 'Invalid username or password.');
+      req.flash('danger', '이용할 수 없는 사용자 혹은 비밀번호입니다.');
       res.redirect('back');
     } else {
       req.session.user = user;
-      req.flash('success', 'Welcome!');
+      req.flash('success', '반갑습니다!');
       res.redirect('/');
     }
   });
@@ -29,8 +29,9 @@ router.post('/signin', function(req, res, next) {
 
 router.get('/signout', function(req, res, next) {
   delete req.session.user;
-  req.flash('success', 'Successfully signed out.');
+  req.flash('success', '로그아웃되었습니다.');
   res.redirect('/');
 });
+
 
 module.exports = router;

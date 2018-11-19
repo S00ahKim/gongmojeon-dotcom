@@ -1,6 +1,6 @@
 extends ../layout
 
-//- 회원가입 
+//- 회원가입
 block content
   .container
     h1.main-title 회원가입
@@ -17,7 +17,6 @@ block content
       .form-group
         label(for='password_confirmation') 비밀번호 확인
         input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password')
-
-      a.btn.btn-outline-secondary(href='/users') List
+      a.btn.btn-outline-secondary(href='/users') 목록
       | 
       button.btn.btn-primary(type='submit') 가입하기

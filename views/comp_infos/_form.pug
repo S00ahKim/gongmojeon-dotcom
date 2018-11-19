@@ -1,9 +1,0 @@
-.form-group
-  label(for="title") 제목
-  input.form-control(type="text", name="title", placeholder="글 제목을 입력하세요.", value=comp_info.title)
-.form-group
-  label(for="comp_info") 모집요강
-  textarea.form-control(name="content", rows="7")= comp_info.content
-.form-group
-  label(for="tags") 태그
-  input.form-control(type="text", name="tags", placeholder="스페이스 바를 눌러 태그를 분리합니다", value=comp_info.tags ? comp_info.tags.join(" ") : "")

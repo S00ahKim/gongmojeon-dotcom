@@ -7,11 +7,12 @@ function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    req.flash('danger', 'Please signin first.');
+    req.flash('danger', '먼저 로그인 해주세요.');
     res.redirect('/signin');
   }
 }
 
+// 1118: 입력되어야 하는 정보 추가할 것 (comp_infos 에도 마찬가지)
 function validateForm(form, options) {
   var name = form.name || "";
   var email = form.email || "";
@@ -19,23 +20,23 @@ function validateForm(form, options) {
   email = email.trim();
 
   if (!name) {
-    return 'Name is required.';
+    return '이름이 입력되어야 합니다.';
   }
 
   if (!email) {
-    return 'Email is required.';
+    return '이메일이 입력되어야 합니다.';
   }
 
   if (!form.password && options.needPassword) {
-    return 'Password is required.';
+    return '비밀번호가 입력되어야 합니다.';
   }
 
   if (form.password !== form.password_confirmation) {
-    return 'Passsword do not match.';
+    return '비밀번호가 맞지 않습니다.';
   }
 
   if (form.password.length < 6) {
-    return 'Password must be at least 6 characters.';
+    return '비밀번호는 최소 6글자 이상이어야 합니다.';
   }
 
   return null;
@@ -65,12 +66,12 @@ router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
 
   const user = await User.findById({_id: req.params.id});
   if (!user) {
-    req.flash('danger', 'Not exist user.');
+    req.flash('danger', '존재하지 않는 사용자입니다.');
     return res.redirect('back');
   }
 
   if (!await user.validatePassword(req.body.current_password)) {
-    req.flash('danger', 'Current password invalid.');
+    req.flash('danger', '유효하지 않은 비밀번호입니다.');
     return res.redirect('back');
   }
 
@@ -80,13 +81,13 @@ router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
     user.password = await user.generateHash(req.body.password);
   }
   await user.save();
-  req.flash('success', 'Updated successfully.');
+  req.flash('success', '수정되었습니다.');
   res.redirect('/users');
 }));
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findOneAndRemove({_id: req.params.id});
-  req.flash('success', 'Deleted Successfully.');
+  req.flash('success', '삭제되었습니다.');
   res.redirect('/users');
 }));
 
@@ -104,7 +105,7 @@ router.post('/', catchErrors(async (req, res, next) => {
   var user = await User.findOne({email: req.body.email});
   console.log('USER???', user);
   if (user) {
-    req.flash('danger', 'Email address already exists.');
+    req.flash('danger', '이미 존재하는 이메일 주소입니다.');
     return res.redirect('back');
   }
   user = new User({
@@ -113,7 +114,7 @@ router.post('/', catchErrors(async (req, res, next) => {
   });
   user.password = await user.generateHash(req.body.password);
   await user.save();
-  req.flash('success', 'Registered successfully. Please sign in.');
+  req.flash('success', '완료되었습니다. 로그인 해주세요.');
   res.redirect('/');
 }));
 

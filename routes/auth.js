@@ -4,7 +4,7 @@ module.exports = (app, passport) => {
   });
 
   app.post('/signin', passport.authenticate('local-signin', {
-    successRedirect : '/questions', // redirect to the secure profile section
+    successRedirect : '/comp_infos', // redirect to the secure profile section
     failureRedirect : '/signin', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
@@ -18,14 +18,14 @@ module.exports = (app, passport) => {
       failureRedirect : '/signin',
       failureFlash : true // allow flash messages
     }), (req, res, next) => {
-      req.flash('success', 'Welcome!');
-      res.redirect('/questions');
+      req.flash('success', '반갑습니다!');
+      res.redirect('/comp_infos');
     }
   );
 
   app.get('/signout', (req, res) => {
     req.logout();
-    req.flash('success', 'Successfully signed out');
+    req.flash('success', '로그아웃되었습니다.');
     res.redirect('/');
   });
 };

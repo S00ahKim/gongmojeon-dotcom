@@ -1,4 +1,5 @@
-// TABLE NAME : USER (about user information)
+// TABLE NAME : USER (사용자 정보)
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');

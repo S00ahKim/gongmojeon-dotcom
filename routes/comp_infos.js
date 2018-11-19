@@ -2,17 +2,17 @@ const express = require('express');
 const Comp_info = require('../models/comp_info');
 const User = require('../models/user'); 
 const Comment = require('../models/comment'); 
-const catchErrors = require('../lib/async-error'); 
+const catchErrors = require('../lib/async-error');
+
 const router = express.Router();
 
-
 function needAuth(req, res, next) {
-    if (req.session.user) {
-      next();
-    } else {
-      req.flash('danger', 'Please signin first.');
-      res.redirect('/signin');
-    }
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    req.flash('danger', '먼저 로그인 해주세요.');
+    res.redirect('/signin');
+  }
 }
 
 /* GET comp_infos listing. */
@@ -33,7 +33,7 @@ router.get('/', catchErrors(async (req, res, next) => {
     populate: 'author', 
     page: page, limit: limit
   });
-  res.render('comp_infos/index', {comp_infos: comp_infos, query: req.query});
+  res.render('comp_infos/index', {comp_infos: comp_infos, term: term, query: req.query});
 }));
 
 router.get('/new', needAuth, (req, res, next) => {
@@ -49,6 +49,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
   const comp_info = await Comp_info.findById(req.params.id).populate('author');
   const comments = await Comment.find({comp_info: comp_info.id}).populate('author');
   comp_info.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
+
   await comp_info.save();
   res.render('comp_infos/show', {comp_info: comp_info, comments: comments});
 }));
@@ -65,18 +66,18 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   comp_info.tags = req.body.tags.split(" ").map(e => e.trim());
 
   await comp_info.save();
-  req.flash('success', '성공적으로 저장되었습니다.');
+  req.flash('success', '등록되었습니다.');
   res.redirect('/comp_infos');
 }));
 
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Comp_info.findOneAndRemove({_id: req.params.id});
-  req.flash('success', '성공적으로 삭제되었습니다.');
+  req.flash('success', '삭제되었습니다.');
   res.redirect('/comp_infos');
 }));
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
+  const user = req.user;
   var comp_info = new Comp_info({
     title: req.body.title,
     author: user._id,
@@ -84,12 +85,12 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
   await comp_info.save();
-  req.flash('success', '성공적으로 등록되었습니다.');
+  req.flash('success', '등록되었습니다.');
   res.redirect('/comp_infos');
 }));
 
 router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
+  const user = req.user;
   const comp_info = await Comp_info.findById(req.params.id);
 
   if (!comp_info) {
@@ -106,7 +107,7 @@ router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
   comp_info.numComments++;
   await comp_info.save();
 
-  req.flash('success', '댓글이 성공적으로 등록되었습니다.');
+  req.flash('success', '댓글이 등록되었습니다.');
   res.redirect(`/comp_infos/${req.params.id}`);
 }));
 

@@ -1,0 +1,9 @@
+.form-group
+  label(for="title") 제목
+  input.form-control(type="text", name="title", placeholder="What's your comp_info?", value=comp_info.title)
+.form-group
+  label(for="comp_info") Comp_info
+  textarea.form-control(name="content", rows="5")= comp_info.content
+.form-group
+  label(for="tags") 태그
+  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=comp_info.tags ? comp_info.tags.join(" ") : "")

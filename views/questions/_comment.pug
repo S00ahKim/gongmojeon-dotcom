@@ -6,7 +6,7 @@
       a.like(href='#', data-id=comment.id)
         i.fa.fa-thumbs-up
         | 
-        | Like
+        | 좋아요
 
   .card-body
     .content= comment.content
@@ -14,7 +14,7 @@
     .col-sm
     .col-sm.text-right
       .author
-        | 댓글 작성 시간 #{moment(comment.createdAt).format('YYYY-MM-DD')}
+        | 댓글작성시각 #{moment(comment.createdAt).format('YYYY-MM-DD')}
         if comment.author
           | 
           | by #[a(href=`/users/${comment.author.id}`)= comment.author.name]

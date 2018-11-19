@@ -16,8 +16,12 @@ block content
           type='password', id='password', name='password', class='form-control', 
           placeholder='Password', required, autofocus
         )
+        .checkbox
+          label 
+            input(type="checkbox", value="remember-me")
+            |
+            | 로그인 유지하기
         button.btn.btn-primary.btn-block(type='submit') 로그인
-        hr
         a.btn.btn-dark.btn-block(href='/auth/facebook')
           i.fa.fa-facebook.fa-lg
           | &nbsp;
@@ -25,4 +29,8 @@ block content
 
         div.sub 
           a(href='/users/new') 회원가입
-          
+          | 
+          | /
+          |
+          a(href='/reset-password') 비밀번호 재설정
+      
