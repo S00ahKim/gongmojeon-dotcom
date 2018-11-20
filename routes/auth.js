@@ -11,7 +11,7 @@ module.exports = (app, passport) => {
 
   app.get('/auth/facebook',
     passport.authenticate('facebook', { scope : 'email' })
-  );
+  ); //-누구인지 찾음.
 
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -24,7 +24,7 @@ module.exports = (app, passport) => {
   );
 
   app.get('/signout', (req, res) => {
-    req.logout();
+    req.logout(); //-auto-logout
     req.flash('success', '로그아웃되었습니다.');
     res.redirect('/');
   });
