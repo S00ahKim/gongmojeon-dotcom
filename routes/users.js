@@ -12,7 +12,7 @@ function needAuth(req, res, next) {
   }
 }
 
-// 1118: 입력되어야 하는 정보 추가할 것 (comp_infos 에도 마찬가지)
+// TODO: 1118: 입력되어야 하는 정보 추가할 것 (comp_infos 에도 마찬가지)
 function validateForm(form, options) {
   var name = form.name || "";
   var email = form.email || "";

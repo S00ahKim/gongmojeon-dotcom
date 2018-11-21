@@ -5,15 +5,20 @@ block content
     h1.main-title= comp_info.title
 
     .comp_info.show
+      if comp_info.img
+        img.img-fluid(src= comp_info.img)
       include _comp_info
 
       .buttons
-        button.btn.btn-primary #[i.fa.fa-thumbs-up] 좋아요
-        if currentUser && comp_info.author.id == currentUser.id
-          | 
-          a.btn.btn-outline-secondary(href=`/comp_infos/${comp_info.id}/edit`) 수정
-          | 
-          a.btn.btn-outline-danger.need-confirm-btn(href=`/comp_infos/${comp_info.id}?_method=delete`) 삭제
+        if currentUser
+          button.btn.btn-primary.comp_info-like-btn(data-id=comp_info.id) 
+            span.for-loading #[i.fa.fa-spin.fa-refresh] 로딩중
+            span #[i.fa.fa-thumbs-up] 좋아요
+          if comp_info.author && comp_info.author.id == currentUser.id
+            | 
+            a.btn.btn-outline-secondary(href=`/comp_infos/${comp_info.id}/edit`) 수정
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/comp_infos/${comp_info.id}?_method=delete`) 삭제
       
     if comp_info.numComments > 0
       hr
@@ -22,9 +27,11 @@ block content
         each comment in comments
           include _comment
 
-    form(action=`/comp_infos/${comp_info.id}/comments`, method='POST')
-      .form-group
-        label(for='comment') 댓글
-        textarea.form-control(name="content", rows="5")
-      button.btn.btn-primary(type="submit") 등록하기
+    if currentUser
+      form(action=`/comp_infos/${comp_info.id}/comments`, method='POST')
+        .form-group
+          label(for='comment') 댓글
+          textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") 등록
 
+  script(src='/javascripts/question_client.js') <!--TODO: ?????-->

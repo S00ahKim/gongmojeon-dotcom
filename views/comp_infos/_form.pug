@@ -1,9 +1,21 @@
 .form-group
   label(for="title") 제목
-  input.form-control(type="text", name="title", placeholder="What's your comp_info?", value=comp_info.title)
+  input.form-control(type="text", name="title", placeholder="공모전 이름", value=comp_info.title)
+  .form-group
+  label(for="host") 주최사
+  input.form-control(type="text", name="host", placeholder="주최사", value=comp_info.host)
+  .form-group
+  label(for="manager") 담당자
+  input.form-control(type="text", name="manager", placeholder="담당자/부서명", value=comp_info.manager)
+  .form-group
+  label(for="contact") 연락처
+  input.form-control(type="text", name="contact", placeholder="연락처", value=comp_info.constact)
 .form-group
-  label(for="comp_info") Comp_info
+  label(for="comp_info") 본문
   textarea.form-control(name="content", rows="5")= comp_info.content
 .form-group
+  label(for="ref") 참고할 만한 자료가 있다면 기입해주세요.
+  input.form-control(type="text", name="ref", placeholder="참고자료", value=comp_info.ref)
+.form-group
   label(for="tags") 태그
-  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=comp_info.tags ? comp_info.tags.join(" ") : "")
+  input.form-control(type="text", name="tags", placeholder="스페이스 바로 태그를 분리합니다.", value=comp_info.tags ? comp_info.tags.join(" ") : "")

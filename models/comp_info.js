@@ -15,9 +15,9 @@ var schema = new Schema({
   numLikes: {type: Number, default: 0},
   numComments: {type: Number, default: 0},
   numReads: {type: Number, default: 0},
-  host: {type: String, trim:true, required: true},
-  manager: {type: String, trim:true, required: true},
-  contact: {type: String, trim:true, required: true},
+  host: {type: String, trim:true},
+  manager: {type: String, trim:true},
+  contact: {type: String, trim:true},
   img: {type: String},  // 이미지의 path를 저장하기 위해 추가
   ref: {type: String},
   createdAt: {type: Date, default: Date.now}
