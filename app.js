@@ -88,13 +88,43 @@ module.exports = (app, io) => {
     next();
   });
 
-  
+  // Socket에서도 Passport로 로그인한 정보를 볼 수 있도록 함.
+  io.use(passportSocketIo.authorize({
+    cookieParser: cookieParser,       // the same middleware you registrer in express
+    key:          sessionId,       // the name of the cookie where express/connect stores its session_id
+    secret:       sessionSecret,    // the session_secret to parse the cookie
+    store:        sessionStore,        // we NEED to use a sessionstore. no memorystore please
+    passport:     passport,
+    success:      (data, accept) => {
+      console.log('successful connection to socket.io');
+      accept(null, true);
+    }, 
+    fail:         (data, message, error, accept) => {
+      // 실패 혹은 로그인 안된 경우
+      console.log('failed connection to socket.io:', message);
+      accept(null, false);
+    }
+  }));
+
+  // connection 요청이 온 경우
+  io.on('connection', socket => {
+    console.log('socket connection!');
+    if (socket.request.user.logged_in) {
+      // 로그인이 된 경우에만 join 요청을 받는다.
+      socket.emit('welcome');
+      socket.on('join', data => {
+        // 본인의 ID에 해당하는 채널에 가입시킨다.
+        socket.join(socket.request.user._id.toString());
+      });
+    }
+  });
 
   // Route
   app.use('/', index);
   app.use('/users', users);
-  app.use('/comp_infos', comp_infos);
+  app.use('/comp_infos', comp_infos(io)); // socket.io를 인자로 주기 위해 function으로 변경
   require('./routes/auth')(app, passport);
+  app.use('/api', require('./routes/api'));
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

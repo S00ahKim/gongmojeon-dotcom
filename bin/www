@@ -5,7 +5,7 @@
  */
 
 var express = require('express');  //-1122
-var app = require('../app');
+var app = express();
 var debug = require('debug')('competition-info:server');
 var http = require('http');
 
