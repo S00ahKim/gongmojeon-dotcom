@@ -4,6 +4,8 @@
 body {
   font: 1rem 'Montserrat', sans-serif;
   margin-top: 50px;
+  margin-left: 10em;
+  margin-right: 10em;
   padding-top: 1em; }
   body > .main-content {
     min-height: 400px; }
@@ -138,3 +140,15 @@ a:hover {
   .show .comment .content {
     margin-bottom: 0.5em;
     color: #bbb; }
+
+/*
+  TODO: 반응형 수정
+  Desktop*/
+@media only screen and (min-width : 1024px){
+
+}
+
+/* Mobile*/
+@media only screen and (max-width : 769px){
+  
+}

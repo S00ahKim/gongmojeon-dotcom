@@ -20,8 +20,8 @@ block content
             td= moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td
               a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/edit`) 
-                | #[i.fa.fa-pencil] 수정
+                | #[i.fa.fa-pencil] 내 정보 수정
               | 
               a.btn.btn-sm.need-confirm-btn.btn-outline-danger(href=`/users/${user._id}?_method=DELETE`)
-                | #[i.fa.fa-trash] 삭제
+                | #[i.fa.fa-trash] 탈퇴하기
     a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] Register a new user

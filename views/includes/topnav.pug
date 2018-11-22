@@ -9,8 +9,6 @@
         ul.navbar-nav.ml-auto
           li.nav-item
             a.nav-link(href="/comp_infos") 모아보기
-          li.nav-item
-            a.nav-link(href="/users") 사용자?
 
           if (!currentUser) 
             li.nav-item
@@ -18,9 +16,14 @@
             li.nav-item
               a.nav-link(href='/users/new') 회원가입
           else
-            li.nav-item.dropdown 마이페이지
-              .dropdown-menu
-                a.dropdown-item(href=`/users/${currentUser._id}`) 내 정보
+            li.nav-item.dropdown
+              a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                | 마이페이지
+              .dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
+                a.dropdown-item(href=`/users/${currentUser._id}`) 내 정보 보기
+                a.dropdown-item(href=`/users/${currentUser._id}/edit`) 내 정보 수정
+                if (currentUser.role == "manager")
+                  a.dropdown-item(href='/users') 회원 보기
             li.nav-item
               a.nav-link(href='/signout') 로그아웃
         
