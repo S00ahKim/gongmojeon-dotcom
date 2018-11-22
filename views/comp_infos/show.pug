@@ -1,5 +1,4 @@
 extends ../layout
-//- TODO: 로딩중 / 좋아요 안됨
 block content
   .container
     h1.main-title= comp_info.title
@@ -11,8 +10,7 @@ block content
 
       .buttons
         if currentUser
-          button.btn.btn-primary.comp_info-like-btn(data-id=comp_info.id) 
-            span.for-loading #[i.fa.fa-spin.fa-refresh] 로딩중
+          button.btn.btn-primary.comp_info-like-btn(data-id=comp_info.id)
             span #[i.fa.fa-thumbs-up] 좋아요
           if comp_info.author && comp_info.author.id == currentUser.id
             | 
@@ -34,4 +32,4 @@ block content
           textarea.form-control(name="content", rows="5")
         button.btn.btn-primary(type="submit") 등록
 
-  script(src='/javascripts/question_client.js') <!--TODO: ?????-->
+  script(src='/javascripts/comp_info_client.js')

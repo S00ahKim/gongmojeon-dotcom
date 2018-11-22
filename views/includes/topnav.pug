@@ -23,7 +23,9 @@
                 a.dropdown-item(href=`/users/${currentUser._id}`) 내 정보 보기
                 a.dropdown-item(href=`/users/${currentUser._id}/edit`) 내 정보 수정
                 if (currentUser.role == "manager")
-                  a.dropdown-item(href='/users') 회원 보기
+                  a.dropdown-item(href='/users') 사용자 목록
+                  a.dropdown-item(href=) 승인 대기 글
+                  //-TODO: 페이지 생성
             li.nav-item
               a.nav-link(href='/signout') 로그아웃
         

@@ -24,4 +24,5 @@ block content
               | 
               a.btn.btn-sm.need-confirm-btn.btn-outline-danger(href=`/users/${user._id}?_method=DELETE`)
                 | #[i.fa.fa-trash] 탈퇴하기
-    a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] Register a new user
+    if (currentUser.role == "manager")
+      a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] 새로운 사용자 계정 생성
