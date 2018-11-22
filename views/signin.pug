@@ -22,14 +22,17 @@ block content
             |
             | 로그인 유지
         button.btn.btn-primary.btn-block(type='submit') 로그인
-        a.btn.btn-dark.btn-block(href='/auth/facebook')
-          i.fa.fa-facebook.fa-lg
-          | &nbsp;
-          | 페이스북으로 로그인
+        .fbook
+          a.btn.btn-dark.btn-block(href='/auth/facebook')
+            i.fa.fa-facebook.fa-lg
+            | &nbsp;
+            | 페이스북으로 로그인
+        .kakao
+          a.btn.btn-dark.btn-block(href='/auth/kakao')
+            i.fa.fa-weixin
+            | &nbsp;
+            | 카카오톡으로 로그인
 
-        div.sub 
+        div.sub
           a(href='/users/new') 회원가입
-          | 
-          | /
-          |
-          a(href='/reset-password') 비밀번호 재설정
+          | &nbsp;하러 가기

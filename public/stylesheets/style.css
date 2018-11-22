@@ -55,6 +55,17 @@ a:hover {
     color: #bababa;
     position: absolute; }
 
+.face > .btn.btn-dark.btn-block{
+  margin-top: 3px;
+  background-color: #00008B;
+}
+
+.kakao > .btn.btn-dark.btn-block{
+  background-color: #FFD700;
+  margin-top: 3px;
+  border-color:  #FFD700;
+}
+
 /*Signin*/
 .form-signin {
   width: 300px;
