@@ -4,8 +4,6 @@
 body {
   font: 1rem 'Montserrat', sans-serif;
   margin-top: 50px;
-  margin-left: 10em;
-  margin-right: 10em;
   padding-top: 1em; }
   body > .main-content {
     min-height: 400px; }
@@ -15,9 +13,8 @@ a:hover {
 
 .jumbotron {
   margin-top: -1em;
-  min-height: 20em;
-  color: black;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); }
+  min-height: 10em;
+  color: black;}
 
 .form-actions {
   padding: 19px 20px 20px;
@@ -144,10 +141,22 @@ a:hover {
   TODO: 반응형 수정
   Desktop*/
 @media only screen and (min-width : 1024px){
+  html{
+    background-color: lightgray;
+  }
 
+  body{
+    margin-left: 10em;
+    margin-right: 10em;
+  }
+
+  .header > .navbar {
+    margin-left: 10em;
+    margin-right: 10em;
+  }
 }
 
 /* Mobile*/
 @media only screen and (max-width : 769px){
-  
+
 }
