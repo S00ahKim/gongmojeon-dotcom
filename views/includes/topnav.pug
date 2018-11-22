@@ -10,15 +10,17 @@
           li.nav-item
             a.nav-link(href="/comp_infos") 모아보기
           li.nav-item
-            a.nav-link(href="/users") 사용자??
+            a.nav-link(href="/users") 사용자?
+
           if (!currentUser) 
             li.nav-item
               a.nav-link(href='/signin') 로그인
             li.nav-item
               a.nav-link(href='/users/new') 회원가입
           else
-            li.nav-item
-              a.nav-link(href=`/users/${currentUser._id}`) 마이페이지
+            li.nav-item.dropdown 마이페이지
+              .dropdown-menu
+                a.dropdown-item(href=`/users/${currentUser._id}`) 내 정보
             li.nav-item
               a.nav-link(href='/signout') 로그아웃
         
