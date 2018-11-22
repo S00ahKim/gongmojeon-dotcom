@@ -12,7 +12,8 @@
   input.form-control(type="text", name="contact", placeholder="연락처", value=comp_info.constact)
 .form-group
   label(for="comp_info") 본문
-  textarea.form-control(name="content", rows="5")= comp_info.content
+  textarea(name="content", style="display:none")= comp_info.content
+  .summernote
 .form-group
   label(for="ref") 참고할 만한 자료가 있다면 기입해주세요.
   input.form-control(type="text", name="ref", placeholder="참고자료", value=comp_info.ref)
