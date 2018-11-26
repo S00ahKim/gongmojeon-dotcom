@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
+const Comp_info = require('../models/comp_info');
 const router = express.Router();
 const catchErrors = require('../lib/async-error');
 

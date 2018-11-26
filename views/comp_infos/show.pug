@@ -17,6 +17,8 @@ block content
             a.btn.btn-outline-secondary(href=`/comp_infos/${comp_info.id}/edit`) 수정
             | 
             a.btn.btn-outline-danger.need-confirm-btn(href=`/comp_infos/${comp_info.id}?_method=delete`) 삭제
+            |
+            a.btn.btn-outline-dark(href=`/comp_infos/${comp_info._id}/favorite`) 즐겨찾기
       
     if comp_info.numComments > 0
       hr

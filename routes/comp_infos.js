@@ -31,7 +31,8 @@ module.exports = io => {
     if (term) {
       query = {$or: [
         {title: {'$regex': term, '$options': 'i'}},
-        {content: {'$regex': term, '$options': 'i'}}
+        {content: {'$regex': term, '$options': 'i'}},
+        {tags: {'$regex': term, '$options': 'i'}}
       ]};
     }
     const comp_infos = await Comp_info.paginate(query, {
@@ -46,6 +47,18 @@ module.exports = io => {
     res.render('comp_infos/new', {comp_info: {}});
   });
 
+  router.get('/:id/favorite', needAuth, (req, res, next) => {
+    const comp_info = Comp_info.findById(req.params.id, function(err, event) {
+      const user = User.findById(req.user.id, function(err, user) {
+        user.favorite.push(event._id);
+        user.save(function(err) {
+          req.flash('success', '즐겨찾기에 추가되었습니다.');
+          res.redirect('back');
+        });
+      });
+    });
+  });
+  
   router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id);
     res.render('comp_infos/edit', {comp_info: comp_info});
