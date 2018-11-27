@@ -35,10 +35,10 @@ a:hover {
   font-size: 2.5rem;
   margin: 1em 0 0.5em 0;
   border-bottom: 1px solid #eee;
-  color: #011a72; }
+  color: black; }
 
 .header > .navbar {
-  text-decoration-color: black;
+  text-emphasis: black;
   background-color: lightgray !important; }
 
 .search-input-group {
@@ -97,7 +97,7 @@ a:hover {
 .main-title .small {
   float: right;
   font-size: 1rem;
-  color: #bbb; }
+  color: black; }
 
 .comp_info {
   line-height: 160%;
@@ -105,23 +105,23 @@ a:hover {
   .comp_info .title {
     font-size: 1.3rem; }
   .comp_info .content {
-    color: #aaa; }
+    color: black; }
   .comp_info .tags {
     margin: 0.5em 0; }
 
 .author {
   text-align: right;
   font-size: 0.8em;
-  color: #81bbf2; }
+  color: darkgray; }
 
 .numbers {
   text-align: left;
-  color: #81bbf2; }
+  color: darkgray; }
 
 .number {
   font-size: 1.2em;
   font-weight: bold;
-  color: #0f5ca6; }
+  color: darkgray; }
 
 .comp_infos .content {
   max-height: 5em;
@@ -147,7 +147,7 @@ a:hover {
     padding-left: 4em; }
   .show .comment .content {
     margin-bottom: 0.5em;
-    color: #bbb; }
+    color: darkgray; }
 
 /*
   TODO: 반응형 수정
