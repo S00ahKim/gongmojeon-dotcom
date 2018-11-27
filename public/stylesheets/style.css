@@ -38,7 +38,8 @@ a:hover {
   color: #011a72; }
 
 .header > .navbar {
-  background-color: #011a72 !important; }
+  text-decoration-color: black;
+  background-color: lightgray !important; }
 
 .search-input-group {
   margin: 1em 0;

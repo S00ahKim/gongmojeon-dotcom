@@ -94,8 +94,11 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  res.render('users/show', {user: user});
+  const comp_infos = Comp_info.findById(req.params.id);
+  const favorites = Comp_info.findById(req.params.id);
+  res.render('users/show', {user: user, comp_infos:comp_infos, favorites:favorites});
 }));
+// 1127: 이 부분 수정한 건데 왜 안 먹힐까 ^^...
 
 router.post('/', catchErrors(async (req, res, next) => {
   var err = validateForm(req.body, {needPassword: true});

@@ -17,15 +17,9 @@ block content
         dd.col-sm-9
           img.img-fluid.rounded-circle(src= user.facebook.photo)
 
-    hr
-    p
-      a.btn.btn-outline-secondary(href='/users/') 목록
-      | 
-      a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) 내 정보 수정
-      | 
-      a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) 탈퇴하기
-    br
     
+    br
+    hr
     br  
     h3
       | 내가 쓴 글 관리하기
@@ -44,7 +38,7 @@ block content
         each comp_info in comp_infos
           tr
             td 
-              a(href=`/comp_infos/${comp_info._id}`)= comp_info.title
+              a(href=`/comp_infos/${comp_infos._id}`)= comp_info.title
               td= comp_info.host
               td= comp_info.contact
               td= comp_info.tags
@@ -55,7 +49,8 @@ block content
                 a.btn.btn-sm.btn-outline-danger(href=`/comp_infos/${comp_info._id}?_method=DELETE`)
                   | #[i.fa.fa-trash] 삭제
                 
-              
+    br
+    hr          
     br
     h3
       | 내 즐겨찾기
@@ -71,10 +66,19 @@ block content
         each favorite in favorites
           tr
             td 
-              a(href=`/comp_infos/${comp_info._id}`)= comp_info.title
+              a(href=`/comp_infos/${comp_infos._id}`)= comp_info.title
               td= comp_info.host
               td= comp_info.contact
               td= comp_info.tags
               
           
     br
+
+    hr
+    p
+      a.btn.btn-outline-secondary(href='/users/') 목록
+      | 
+      a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) 내 정보 수정
+      | 
+      a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) 탈퇴하기
+    

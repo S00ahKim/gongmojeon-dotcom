@@ -33,8 +33,8 @@ module.exports = (app, io) => {
   // mongodb connect
   mongoose.Promise = global.Promise; // ES6 Native Promise를 mongoose에서 사용한다.
 
-  // TODO: atlas에 연결하기. 1118: local db 이용
-  const connStr = 'mongodb://localhost/comp_info_db';
+  // TODO: atlas에 연결하기. 1127: db deploy (mlab)
+  const connStr = 'mongodb://sooah:qlalfqjsgh1!@ds151393.mlab.com:51393/comp_info';
   mongoose.connect(connStr, {useMongoClient: true });
   mongoose.connection.on('error', console.error);
 
