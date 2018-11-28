@@ -71,7 +71,9 @@ module.exports = io => {
 
     await comp_info.save();
     res.render('comp_infos/show', {comp_info: comp_info, comments: comments});
+    res.render('index', {comp_info: comp_info, comments: comments});
   }));
+
 
   router.put('/:id', catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id);
@@ -82,6 +84,10 @@ module.exports = io => {
     }
     comp_info.title = req.body.title;
     comp_info.content = req.body.content;
+    comp_info.host = req.body.host;
+    comp_info.manager = req.body.manager;
+    comp_info.contact = req.body.contact;
+    comp_info.ref = req.body.ref;
     comp_info.tags = req.body.tags.split(" ").map(e => e.trim());
 
     await comp_info.save();
@@ -119,6 +125,10 @@ module.exports = io => {
       title: req.body.title,
       author: req.user._id,
       content: req.body.content,
+      host: req.body.host,
+      manager: req.body.manager,
+      contact: req.body.contact,
+      ref: req.body.ref,
       tags: req.body.tags.split(" ").map(e => e.trim()),
     });
     if (req.file) {

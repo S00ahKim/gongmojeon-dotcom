@@ -13,10 +13,12 @@
 .form-group
   label(for="comp_info") 본문
   textarea(name="content", style="display:none")= comp_info.content
-  .summernote
+  .summernote 
 .form-group
   label(for="ref") 참고할 만한 자료가 있다면 기입해주세요.
   input.form-control(type="text", name="ref", placeholder="참고자료", value=comp_info.ref)
 .form-group
   label(for="tags") 태그
   input.form-control(type="text", name="tags", placeholder="스페이스 바로 태그를 분리합니다.", value=comp_info.tags ? comp_info.tags.join(" ") : "")
+
+

@@ -94,11 +94,11 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  const comp_infos = Comp_info.findById(req.params.id);
-  const favorites = Comp_info.findById(req.params.id);
-  res.render('users/show', {user: user, comp_infos:comp_infos, favorites:favorites});
+  const comp_info = Comp_info.findById(req.params.id);
+  const favorite = Comp_info.findById(req.params.id);
+  res.render('users/show', {user: user, comp_info:comp_info, favorite:favorite});
 }));
-// 1127: 이 부분 수정한 건데 왜 안 먹힐까 ^^...
+// TODO: 1127: 이 부분 수정한 건데 왜 안 먹힐까 ^^...
 
 router.post('/', catchErrors(async (req, res, next) => {
   var err = validateForm(req.body, {needPassword: true});

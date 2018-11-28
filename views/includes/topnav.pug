@@ -21,6 +21,8 @@
                 | 마이페이지
               .dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
                 a.dropdown-item(href=`/users/${currentUser._id}`) 내 정보 보기
+                a.dropdown-item(href=`/users/${currentUser._id}/???`) 내가 쓴 글
+                a.dropdown-item(href=`/users/${currentUser._id}/favorite`) 즐겨찾기
                 a.dropdown-item(href=`/users/${currentUser._id}/edit`) 내 정보 수정
                 if (currentUser.role == "manager")
                   a.dropdown-item(href='/users') 사용자 목록
