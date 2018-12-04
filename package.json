@@ -9,6 +9,7 @@
     "node": "8.11.4"
   },
   "dependencies": {
+    "ajax": "0.0.4",
     "async-error-catcher": "^1.2.0",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",

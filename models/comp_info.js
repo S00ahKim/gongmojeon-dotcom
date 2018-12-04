@@ -5,12 +5,15 @@ const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
 
 /* DB schema
-  (공모전 정보의 스키마: 글쓴이, 글제목, 본문(공모요강을 써야 할 부분/UI에서 언급필요), 
+  (공모전 정보의 스키마: 글쓴이, 글제목, 본문(공모요강을 써야 할 부분/UI에서 언급필요), 주제, 장소(맵)
   태그, 좋아요수, 댓글수, 조회수, 주최사, 담당자, 연락처, 홍보용이미지, 참고할 정보(선택입력/기타정보해당))*/
 var schema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   title: {type: String, trim: true, required: true},
   content: {type: String, trim: true, required: true},
+  topic: {type: String, trim:true, required:false},
+  location: {type: String, trim: true, required: false},
+  location_map: {type: String, trim: true, required: false},
   tags: [String],
   numLikes: {type: Number, default: 0},
   numComments: {type: Number, default: 0},

@@ -149,6 +149,14 @@ a:hover {
     margin-bottom: 0.5em;
     color: darkgray; }
 
+.info-table{
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  margin : 20px 10px;
+  border: 1px solid #ccc;
+}
+
 /*
   TODO: 반응형 수정
   Desktop*/

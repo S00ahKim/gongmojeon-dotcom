@@ -20,7 +20,7 @@ block content
         each comp_info in comp_infos.docs
           .comp_info
             a.title(href=`/comp_infos/${comp_info.id}`)= comp_info.title
-            include _comp_info
+            //-include _comp_info TODO: 보일 정보만 보이기.
 
       +paginate(comp_infos, '/comp_infos', query)
 

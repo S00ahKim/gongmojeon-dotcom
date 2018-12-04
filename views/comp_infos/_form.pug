@@ -1,15 +1,34 @@
 .form-group
   label(for="title") 제목
   input.form-control(type="text", name="title", placeholder="공모전 이름", value=comp_info.title)
-  .form-group
+
+.form-group
   label(for="host") 주최사
   input.form-control(type="text", name="host", placeholder="주최사", value=comp_info.host)
-  .form-group
+
+.form-group
   label(for="manager") 담당자
   input.form-control(type="text", name="manager", placeholder="담당자/부서명", value=comp_info.manager)
-  .form-group
+
+.form-group
   label(for="contact") 연락처
   input.form-control(type="text", name="contact", placeholder="연락처", value=comp_info.constact)
+
+.form-group
+  label(for="topic") 주제 &nbsp;
+  select.form-control(name="topic")= comp_info.topic
+    option(value="Idea") 기획/아이디어
+    option(value="Marketing") 광고/마케팅
+    option(value="Report") 논문/리포트
+    option(value="Video") 영상
+    option(value="Picture") 사진
+    option(value="Design") 아트/디자인
+    option(value="WebMobile") 웹/모바일
+    option(value="Software") 소프트웨어
+    option(value="Literature") 문학/시나리오
+    option(value="Volunteer") 봉사활동
+    option(value="Etc") 기타
+
 .form-group
   label(for="comp_info") 본문
   textarea(name="content", style="display:none")= comp_info.content

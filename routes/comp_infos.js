@@ -84,6 +84,9 @@ module.exports = io => {
     }
     comp_info.title = req.body.title;
     comp_info.content = req.body.content;
+    comp_info.topic = req.body.topic;
+    comp_info.location = req.body.location;
+    comp_info.location_map = req.body.location_map;
     comp_info.host = req.body.host;
     comp_info.manager = req.body.manager;
     comp_info.contact = req.body.contact;
@@ -125,6 +128,9 @@ module.exports = io => {
       title: req.body.title,
       author: req.user._id,
       content: req.body.content,
+      topic: req.body.topic,
+      location: req.body.location,
+      location_map: req.body.location_map,
       host: req.body.host,
       manager: req.body.manager,
       contact: req.body.contact,
