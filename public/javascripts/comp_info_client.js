@@ -1,6 +1,6 @@
 $(function() {
   $('.comp_info-like-btn').click(function(e) {
-    var $el = $(e.currentTarget);
+    var $el = $(e.currentTarget); //-눌러진 부분 레퍼런스
     if ($el.hasClass('loading')) return;
     $el.addClass('loading');
     $.ajax({

@@ -12,7 +12,11 @@
 
 .form-group
   label(for="contact") 연락처
-  input.form-control(type="text", name="contact", placeholder="연락처", value=comp_info.constact)
+  input.form-control(type="text", name="contact", placeholder="연락처", value=comp_info.contact)
+
+.form-group
+  label(for="location") 장소
+  input.form-control(type="text", name="location", placeholder="특정한 개최 장소가 있을 경우 입력해 주세요.", value=comp_info.location)
 
 .form-group
   label(for="topic") 주제 &nbsp;
@@ -40,4 +44,6 @@
   label(for="tags") 태그
   input.form-control(type="text", name="tags", placeholder="스페이스 바로 태그를 분리합니다.", value=comp_info.tags ? comp_info.tags.join(" ") : "")
 
+//- .form-group
+//-   .g-recaptcha(data-sitekey='6LdRlX0UAAAAALw39KFP_5TjwMJjjR4pmRxwj6Yx')
 

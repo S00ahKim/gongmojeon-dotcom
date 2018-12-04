@@ -1,0 +1,56 @@
+br
+    hr
+    br  
+    h3
+      | 내가 쓴 글 관리하기
+    br
+
+    table.table.table-hover
+      thead
+        tr
+          th 공모전 이름
+          th 주최사
+          th 연락처
+          th 태그
+          th 
+          th
+          th
+      tbody
+        each comp_info in comp_infos
+          tr
+            td 
+              a(href=`/comp_infos/${comp_infos._id}`)= comp_info.title
+              td= comp_info.host
+              td= comp_info.contact
+              td= comp_info.tags
+              td
+                a.btn.btn-sm.btn-outline-secondary(href=`/comp_infos/${comp_info._id}/edit`) 
+                  | #[i.fa.fa-pencil] 수정
+                | 
+                a.btn.btn-sm.btn-outline-danger(href=`/comp_infos/${comp_info._id}?_method=DELETE`)
+                  | #[i.fa.fa-trash] 삭제
+                
+    br
+    hr          
+    br
+    h3
+      | 내 즐겨찾기
+    br
+    table.table.table-hover
+      thead
+        tr
+          th 공모전 이름
+          th 주최사
+          th 연락처
+          th 태그
+      tbody
+        each favorite in favorites
+          tr
+            td 
+              a(href=`/comp_infos/${comp_infos._id}`)= comp_info.title
+              td= comp_info.host
+              td= comp_info.contact
+              td= comp_info.tags
+              
+          
+    br

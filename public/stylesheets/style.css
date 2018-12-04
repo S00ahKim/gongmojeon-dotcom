@@ -8,7 +8,12 @@ body {
   body > .main-content {
     min-height: 400px; }
 
+a{
+  color:black;
+}
+
 a:hover {
+  color: darkgray;
   text-decoration: none; }
 
 .jumbotron {
@@ -39,7 +44,7 @@ a:hover {
 
 .header > .navbar {
   text-emphasis: black;
-  background-color: lightgray !important; }
+  background-color: #eee !important; }
 
 .search-input-group {
   margin: 1em 0;
@@ -149,12 +154,11 @@ a:hover {
     margin-bottom: 0.5em;
     color: darkgray; }
 
-.info-table{
-  border-collapse: collapse;
-  text-align: left;
-  line-height: 1.5;
-  margin : 20px 10px;
-  border: 1px solid #ccc;
+table.info-table{
+  text-align: center;
+  margin : 1.3em;
+  padding: 1.3em;
+  border: 1px;
 }
 
 /*
@@ -162,7 +166,7 @@ a:hover {
   Desktop*/
 @media only screen and (min-width : 1024px){
   html{
-    background-color: lightgray;
+    background-color: #eee;
   }
 
   body{

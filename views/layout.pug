@@ -23,6 +23,9 @@ html
     //- socket io
     script(src='/socket.io/socket.io.js') 
 
+    //- recaptcha
+    script(src="https://www.google.com/recaptcha/api.js")
+
   body
     block top-nav
       include ./includes/topnav
@@ -61,3 +64,4 @@ html
           message: title
         });
       });
+

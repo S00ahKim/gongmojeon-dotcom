@@ -1,5 +1,5 @@
 .header.clearfix
-  nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+  nav.navbar.navbar-expand-md.navbar.bg-dark.fixed-top
     .container
       a.navbar-brand(href="/") 공모전닷컴
       button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarsExampleDefault", aria-controls="navbarsExampleDefault", aria-expanded="false", aria-label="Toggle navigation")
@@ -21,7 +21,7 @@
                 | 마이페이지
               .dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
                 a.dropdown-item(href=`/users/${currentUser._id}`) 내 정보 보기
-                a.dropdown-item(href=`/users/${currentUser._id}/???`) 내가 쓴 글
+                a.dropdown-item(href=`/comp_infos/${currentUser._id}/`) 내가 쓴 글
                 a.dropdown-item(href=`/users/${currentUser._id}/favorite`) 즐겨찾기
                 a.dropdown-item(href=`/users/${currentUser._id}/edit`) 내 정보 수정
                 if (currentUser.role == "manager")

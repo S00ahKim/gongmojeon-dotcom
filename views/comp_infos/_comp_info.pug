@@ -1,21 +1,18 @@
-.info_table
+table.info_table
   tr 
     th 분야
     td.smallText=comp_info.topic
     th 주최사
     td.smallText=comp_info.host
-  tr 
     th 담당자
     td.smallText=comp_info.manager
     th 연락처
     td.smallText=comp_info.contact
-    th 위치
+    th 장소
     td.smallText=comp_info.location
 
-
-//-TODO: 지도 삽입
-
-.content=comp_info.content
+//-TODO: 지도삽입
+.content !{comp_info.content}
 
 .tags.badges
   each tag in comp_info.tags 
