@@ -19,6 +19,14 @@
   input.form-control(type="text", name="location", placeholder="특정한 개최 장소가 있을 경우 입력해 주세요.", value=comp_info.location)
 
 .form-group
+  label(for="startDate") 시작일자
+  input.form-control(type="text", name="startDate", placeholder="시작일자를 입력하시오. YYYY-MM-DD의 형태", value=comp_info.startDate)
+
+.form-group
+  label(for="endDate") 마감일자
+  input.form-control(type="text", name="endDate", placeholder="마감일자를 입력하시오. YYYY-MM-DD의 형태", value=comp_info.endDate)
+
+.form-group
   label(for="topic") 주제 &nbsp;
   select.form-control(name="topic")= comp_info.topic
     option(value="Idea") 기획/아이디어
