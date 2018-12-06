@@ -36,12 +36,12 @@ $(".btn.btn-outline-primary").click(function() {
   $('textarea[name="content"]').val($('.summernote').summernote('code'));
 });
 
-// if (typeof(grecaptcha) != 'undefined'){
-//   if (grecaptcha.getResponse() == ""){
-//     alert("스팸방지코드를 제대로 체크해 주세요.")
-//     return false;
-//   }
-// }
+if (typeof(grecaptcha) != 'undefined'){
+  if (grecaptcha.getResponse() == ""){
+    alert("스팸방지코드를 제대로 체크해 주세요.")
+    return false;
+  }
+}
 
 // function chk_recaptcha(){
 //   if (!isset($_POST['g-recaptcha-response']))return false;

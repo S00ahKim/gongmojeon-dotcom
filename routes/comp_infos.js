@@ -2,6 +2,7 @@ const express = require('express');
 const Comp_info = require('../models/comp_info');
 const User = require('../models/user'); 
 const Comment = require('../models/comment'); 
+const Favorite = require('../models/favorite')
 const catchErrors = require('../lib/async-error');
 
 const multer = require('multer');
