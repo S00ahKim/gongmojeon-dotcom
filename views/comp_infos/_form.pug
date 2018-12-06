@@ -42,9 +42,25 @@
     option(value="Etc") 기타
 
 .form-group
+  label(for="applicant") 참가대상 &nbsp;
+  select.form-control(name="applicant")= comp_info.applicant
+    option(value="child") 유아 (5-7세)
+    option(value="elem") 초등학생 (8-13세)
+    option(value="mid") 중학생 (14-16세)
+    option(value="high") 고등학생 (17-19세)
+    option(value="univ") 대학생
+    option(value="grad") 대학원생
+    option(value="youth") 청소년
+    option(value="adult") 성인
+    option(value="public") 일반인
+    option(value="nomatter") 관계없음
+    option(value="Etc") 기타 (본문 기입 바람)
+
+.form-group
   label(for="comp_info") 본문
   textarea(name="content", style="display:none")= comp_info.content
-  .summernote 
+  .summernote
+
 .form-group
   label(for="ref") 참고할 만한 자료가 있다면 기입해주세요.
   input.form-control(type="text", name="ref", placeholder="참고자료", value=comp_info.ref)
