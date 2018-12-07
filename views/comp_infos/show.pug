@@ -19,6 +19,8 @@ block content
             a.btn.btn-outline-danger.need-confirm-btn(href=`/comp_infos/${comp_info.id}?_method=delete`) 삭제
             | &nbsp;
             a.btn.btn-outline-dark(href=`/comp_infos/${comp_info._id}/favorite`) 즐겨찾기
+
+    //-include _facebookShare
       
     if comp_info.numComments > 0
       hr
@@ -35,3 +37,4 @@ block content
         button.btn.btn-primary(type="submit") 등록
 
   script(src='/javascripts/comp_info_client.js') 
+  script(src='/javascripts/share.js')

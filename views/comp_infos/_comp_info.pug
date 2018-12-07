@@ -4,6 +4,10 @@ table.info_table
     td.smallText=comp_info.topic
     th 주최사
     td.smallText=comp_info.host
+    th 대상
+    td.smallText=comp_info.applicant
+
+  tr  
     th 담당자
     td.smallText=comp_info.manager
     th 연락처
@@ -11,8 +15,20 @@ table.info_table
     th 장소
     td.smallText=comp_info.location
 
+  tr
+    th 시작일자
+    td=comp_info.startDate
+    th 마감일자
+    tdt=comp_info.endDate
+
 //-TODO: 지도삽입
 .content !{comp_info.content}
+
+
+br
+br
+p(style= "font-weight: bold") 참고
+.content=comp_info.ref
 
 .tags.badges
   each tag in comp_info.tags 

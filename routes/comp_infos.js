@@ -1,8 +1,7 @@
 const express = require('express');
 const Comp_info = require('../models/comp_info');
 const User = require('../models/user'); 
-const Comment = require('../models/comment'); 
-const Favorite = require('../models/favorite')
+const Comment = require('../models/comment');
 const catchErrors = require('../lib/async-error');
 
 const multer = require('multer');
@@ -48,17 +47,33 @@ module.exports = io => {
     res.render('comp_infos/new', {comp_info: {}});
   });
 
-  router.get('/:id/favorite', needAuth, (req, res, next) => {
-    const comp_info = Comp_info.findById(req.params.id, function(err, event) {
-      const user = User.findById(req.user.id, function(err, user) {
-        user.favorite.push(event._id);
-        user.save(function(err) {
-          req.flash('success', '즐겨찾기에 추가되었습니다.');
-          res.redirect('back');
-        });
-      });
-    });
-  });
+  //- TODO: 즐찾방식 수정할 것.
+  // router.get('/:id/favorite', needAuth, catchErrors(async  (req, res, next) => {
+  //   const comp_info = await Comp_info.findById(req.params.id);
+  //   if (!comp_info) {
+  //     res.status(404).json({result: 0, message: 'not exist comp_info'});
+  //     return;
+  //   }
+  //   // req.user.favorite.push(comp_info._id);
+  //   // await req.user.save();
+    
+  //   await Favorite.create({user: req.user.id, doc: req.params.id})
+
+  //   , function(err, comp_info) {
+  //     const user = User.findById(req.user.id, function(err, user) {
+  //       user.favorite.push(comp_info._id);
+        
+  //       user.save(function(err) {
+  //         req.flash('success', '즐겨찾기에 추가되었습니다.');
+  //         res.redirect('back');
+  //       });
+  //       const favorite = Favorite.findById(req.params.id, function(err, favorite){
+  //         favorite.adder.push(user._id);
+  //         favorite.author.push(req.params.id);
+  //         favorite.comp_info.push(comp_info._id);
+  //       })
+  //     });
+  // }));
   
   router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id);

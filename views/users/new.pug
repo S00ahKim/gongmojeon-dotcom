@@ -2,8 +2,13 @@ extends ../layout
 
 //- 회원가입 
 block content
-  .container
+  .container 
     h1.main-title 회원가입
+    .container
+      p(style="font-weight:bold; font-size:1.3em") 개인정보처리방침
+        include _personalinfo
+      p(style="font-weight:bold; font-size:1.3em") 서비스 약관
+        include _service
     form(action='/users', method='POST')
       .form-group
         label(for='name') 이름
