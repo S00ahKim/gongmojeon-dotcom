@@ -19,10 +19,10 @@ block content
             td= user.email
             td= moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td
-              a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/edit`) 
-                | #[i.fa.fa-pencil] 내 정보 수정
+              a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/edit_admin`) 
+                | #[i.fa.fa-pencil] 정보 수정
               | 
               a.btn.btn-sm.need-confirm-btn.btn-outline-danger(href=`/users/${user._id}?_method=DELETE`)
                 | #[i.fa.fa-trash] 탈퇴하기
     if (currentUser.role == "manager")
-      a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] 새로운 사용자 계정 생성
+      a.btn.btn-primary(href='/users/new-admin') #[i.fa.fa-plus] 새로운 사용자 계정 생성

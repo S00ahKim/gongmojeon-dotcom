@@ -1,9 +1,10 @@
 extends ../layout
 
-//- 개인 정보 수정
+//- 회원정보 수정
 block content
   .container
-    h1.main-title 개인정보 수정
+    h1.main-title 회원정보 수정
+    p 이 페이지는 관리자 페이지입니다. 수정시 주의하시기 바랍니다.
     form(action=`/users/${user._id}?_method=PUT`, method='POST')
       .form-group
         label(for='name') 이름
@@ -12,14 +13,10 @@ block content
         label(for='email') 이메일
         input.form-control(type='email', id='email', name='email', placeholder='이메일', value=user.email)
       .form-group
-        label(for='current_password') 현재 비밀번호
-        input.form-control(type='password', id='current_password', name='current_password', placeholder='현재 비밀번호')
-      .form-group
         label(for='password') 수정 비밀번호
         input.form-control(type='password', id='password', name='password', placeholder='바꾸고 싶은 비밀번호')
       .form-group
         label(for='password_confirmation') 비밀번호 확인
         input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='비밀번호 확인')
-      a.btn.btn-outline-secondary(href='javascript:window.history.back();') 뒤로가기
-      | 
-      button.btn.btn-primary(type='submit') 수정
+      
+      button.btn.btn-primary(type='submit') 수정완료

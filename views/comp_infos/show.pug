@@ -11,6 +11,7 @@ block content
       .buttons
         if currentUser
           button.btn.btn-primary.comp_info-like-btn(data-id=comp_info.id)
+            span.for-loading #[i.fa.fa-spin.fa-refresh] Loading
             span #[i.fa.fa-thumbs-up] 좋아요
           a.btn.btn-outline-dark(href=`/comp_infos/${comp_info._id}/favorite`) 즐겨찾기
           .fb-share-button(data-layout="button" data-size="large" data-mobile-iframe="true" style="float:right")

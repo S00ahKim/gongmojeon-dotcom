@@ -161,6 +161,16 @@ table.info-table{
   border: 1px;
 }
 
+
+
+.comp_info-like-btn, .comment-like-btn {
+  cursor: pointer; }
+.comp_info-like-btn .for-loading, .comment-like-btn .for-loading {
+    display: none; }  
+.comp_info-like-btn.loading, .comment-like-btn.loading {
+    filter: opacity(30%);
+    cursor: wait; }
+
 /*
   TODO: 반응형 수정
   Desktop*/

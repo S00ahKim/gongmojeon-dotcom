@@ -1,0 +1,20 @@
+extends ../layout
+
+//- 관리자 계정 만들기
+block content
+  .container
+    h1.main-title 관리자 계정 만들기
+    form(action=`/users/?_method=PUT`, method='POST')
+      .form-group
+        label(for='name') 이름
+        input.form-control(type='text', id='name', name='name', placeholder='Your name', value=user.name)
+      .form-group
+        label(for='email') 이메일
+        input.form-control(type='email', id='email', name='email', placeholder='Email', value=user.email)
+      .form-group
+        label(for='role') 역할 지정
+        input.form-control(type='role', id='role', name='role', placeholder='지정 사용자를 관리자로 승격하려면 manager를 입력하시오', value=user.role)
+        
+      a.btn.btn-outline-secondary(href='javascript:window.history.back();') 뒤로가기
+      | 
+      button.btn.btn-primary(type='submit') 수정
