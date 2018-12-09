@@ -19,7 +19,7 @@ block content
             td= user.email
             td= moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss')
             td
-              a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/edit_admin`) 
+              a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/editAdmin`) 
                 | #[i.fa.fa-pencil] 정보 수정
               | 
               a.btn.btn-sm.need-confirm-btn.btn-outline-danger(href=`/users/${user._id}?_method=DELETE`)

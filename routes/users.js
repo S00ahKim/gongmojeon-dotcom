@@ -53,9 +53,18 @@ router.get('/new', (req, res, next) => {
   res.render('users/new', {messages: req.flash()});
 });
 
+router.get('/new-admin', (req, res, next) => {
+  res.render('users/new-admin', {messages: req.flash()});
+});
+
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   res.render('users/edit', {user: user});
+}));
+
+router.get('/:id/editAdmin', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  res.render('users/editAdmin', {user: user});
 }));
 
 router.put('/:id', needAuth, catchErrors(async (req, res, next) => {

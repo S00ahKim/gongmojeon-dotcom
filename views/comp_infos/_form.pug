@@ -115,26 +115,26 @@
 
 .form-group
   label(for="start") 시작일자
-  input.form-control(type="datetime-local", name="start", placeholder="시작일자를 입력하시오. YYYY-MM-DD의 형태", value=comp_info.start)
+  input.form-control(type="date", name="start", value=comp_info.start)
 
 .form-group
   label(for="end") 마감일자
-  input.form-control(type="datetime-local", name="end", placeholder="마감일자를 입력하시오. YYYY-MM-DD의 형태", value=comp_info.end)
+  input.form-control(type="date", name="end", value=comp_info.end)
 
 .form-group
   label(for="applicant") 참가대상 &nbsp;
   select.form-control(name="applicant")=comp_info.applicant
-    option(value="유아 (5-7세)") 유아 (5-7세)
-    option(value="초등학생 (8-13세)") 초등학생 (8-13세)
-    option(value="중학생 (14-16세)") 중학생 (14-16세)
-    option(value="고등학생 (17-19세)") 고등학생 (17-19세)
+    option(value="유아") 유아 (5-7세)
+    option(value="초등학생") 초등학생 (8-13세)
+    option(value="중학생") 중학생 (14-16세)
+    option(value="고등학생") 고등학생 (17-19세)
     option(value="대학생") 대학생
     option(value="대학원생") 대학원생
     option(value="청소년") 청소년
     option(value="성인") 성인
     option(value="일반인") 일반인
     option(value="관계없음") 관계없음
-    option(value="기타(본문 참조)") 기타 (본문 기입 바람)
+    option(value="기타") 기타 (본문 기입 바람)
 
 .form-group
   label(for="content") 본문
@@ -158,13 +158,3 @@
 
 .form-group
   .g-recaptcha(data-sitekey='6LdRlX0UAAAAALw39KFP_5TjwMJjjR4pmRxwj6Yx')
-
-
-//- script.
-//-   $(function($){
-//-     $('a.add').click(function(e) {
-//-       var $item = e.currentTarget;
-//-       var $map = $item.closest(".map");
-//-       $map.addClass('select');
-//-     });
-//-   });
