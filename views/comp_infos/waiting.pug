@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title 승인 대기 중인 글
+          
+    br
+    if comp_info._id
+      table.table.table-hover
+        thead
+          tr
+            th 제목
+            th 주최사
+            th 연락처
+            th 태그
+        tbody
+            each comp_info in comp_info
+              tr
+                td
+                  a(href=`/comp_infos/${comp_info._id}`)= comp_info.title
+                td= comp_info.host
+                td= comp_info.contact
+                td= comp_info.tags
+    else
+        p 승인 대기 중인 글이 없습니다.
