@@ -17,11 +17,40 @@ table.info_table
 
   tr
     th 시작일자
-    td=comp_info.start
+    td.smallText=comp_info.start
     th 마감일자
-    tdt=comp_info.end
+    td.smallText=comp_info.end
 
-//-TODO: 지도삽입
+if comp_info.location_map
+  .smallText!= comp_info.location_map
+  .smallText#lat(data-value=comp_info.lat)= comp_info.lat 
+  .smallText#lng(data-value=comp_info.lng)= comp_info.lng
+  .map_wrap
+    #map(style='width:100%;height:100%;position:relative;overflow:hidden;')
+      |      
+    .hAddr        
+      span#centerAddr
+        script(type='text/javascript', src='//dapi.kakao.com/v2/maps/sdk.js?appkey=7235e7c57191d55774b383b2856384b2&libraries=services')
+        script.
+          var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+              mapOption = { 
+                  center: new daum.maps.LatLng($('#lat').data('value'), $('#lng').data('value')), // 지도의 중심좌표
+                  level: 3 // 지도의 확대 레벨
+              };
+
+          var staticmap = new daum.maps.StaticMap(mapContainer, mapOption); // 지도를 생성합니다
+
+          // 지도를 클릭한 위치에 표출할 마커입니다
+          var marker = new daum.maps.Marker({ 
+              // 지도 중심좌표에 마커를 생성합니다 
+              position: markerPosition             
+          }); 
+              // 지도에 마커를 표시합니다
+          marker.setMap(map);
+          map.setDraggable(false);
+          map.setZoomable(false); 
+
+
 .content !{comp_info.content}
 
 

@@ -35,8 +35,10 @@
   input.form-control(type="text", name="location", placeholder="특정한 개최 장소가 있을 경우 입력해 주세요.", value=comp_info.location)
 
 .form-group
+  label(for="location") Location
+  |     
   p
-  | 공모전이 진행될 장소를 지도에 표시하세요
+    |공모전이 개최되는 장소를 클릭하세요.
   | 
   .map_wrap
     #map(style='width:100%;height:100%;position:relative;overflow:hidden;')
@@ -44,12 +46,11 @@
   .hAddr  
     input.form-control(type="text", id="location_map",name="location_map", value=comp_info.location_map)
   .hAddr    
-    input.form-control(type="hidden", id="lat",name="lat", value=comp_info.lat)        
-    input.form-control(type="hidden", id="lng",name="lng", value=comp_info.lng)        
+    input.form-control(type="text", id="lat",name="lat", value=comp_info.lat)        
+    input.form-control(type="text", id="lng",name="lng", value=comp_info.lng)        
     span#centerAddr
       script(type='text/javascript', src='//dapi.kakao.com/v2/maps/sdk.js?appkey=7235e7c57191d55774b383b2856384b2&libraries=services')
       script.
-        script.
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
           center: new daum.maps.LatLng(37.5777249,126.9258444), // 지도의 중심좌표
@@ -71,15 +72,12 @@
           searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
           if (status === daum.maps.services.Status.OK) {
             detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+            detailAddr += '<div>주소 : ' + result[0].address.address_name + '</div>';
             var content = '<div class="bAddr">' +
-            '<span class="title">법정동 주소정보</span>' +
+            '<span class="addressTitle">법정동 주소정보</span>' +
             detailAddr +
             '</div>';
             document.getElementById('location_map').value= detailAddr;
-            //- console.log(mouseEvent.latLng.getLat(), mouseEvent.latLng.getLng());
-            //- document.getElementById('location_latLng').value= mouseEvent.latLng;
-            //- 
             $('#lat').val(mouseEvent.latLng.getLat());
             $('#lng').val(mouseEvent.latLng.getLng());
             // 마커를 클릭한 위치에 표시합니다
@@ -110,8 +108,6 @@
             infoDiv.innerHTML = result[0].address_name;
           }
         }
-
-
 
 .form-group
   label(for="start") 시작일자

@@ -104,10 +104,16 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   const comp_info = Comp_info.findById(req.params.id);
-  const favorite = Comp_info.findById(req.params.id);
+  const favorite = User.findById(req.params.id);
   res.render('users/show', {user: user, comp_info:comp_info, favorite:favorite});
 }));
-// TODO: 1127: 이 부분 수정한 건데 왜 안 먹힐까 ^^...
+// TODO: 1127: 이 부분 수정한 건데 왜 안 먹힐까 ^^... 1209 수정함.
+
+router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
+  req.user.favorite.push(comp_info._id);
+  await req.user.save();
+  res.render('user/favorite', {user:user});
+}));
 
 router.post('/', catchErrors(async (req, res, next) => {
   var err = validateForm(req.body, {needPassword: true});
