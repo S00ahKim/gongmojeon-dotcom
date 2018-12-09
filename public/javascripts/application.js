@@ -43,7 +43,7 @@ $(".btn.btn-outline-primary").click(function() {
 //   }
 // }
 
-// function chk_recaptcha(){
+// $(function chk_recaptcha(){
 //   if (!isset($_POST['g-recaptcha-response']))return false;
 
 //   $gg_response = trim($_POST['g-recaptcha-response']);
@@ -66,4 +66,4 @@ $(".btn.btn-outline-primary").click(function() {
 //     history.go(-1);
 //   }
 //   return true;
-// }
+// });

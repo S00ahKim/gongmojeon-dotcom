@@ -3,9 +3,31 @@ block content
   .container
     h1.main-title= comp_info.title
 
+    if comp_info.location_map
+      .map_wrap
+          #map(style='width:100%;height:100%;position:relative;overflow:hidden;')
+          |     
+      .hAddr        
+          span#centerAddr
+            script(type='text/javascript', src='//dapi.kakao.com/v2/maps/sdk.js?appkey=b5ed571b8e4f6a7bf21a34847f1bc888&libraries=services')
+            script.
+              var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                  mapOption = { 
+                      center: new daum.maps.LatLng(comp_info.lat, comp_info.lng), // 지도의 중심좌표
+                      level: 3 // 지도의 확대 레벨
+                  };
+
+              var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+              // 지도를 클릭한 위치에 표출할 마커입니다
+              var marker = new daum.maps.Marker({ 
+                  // 지도 중심좌표에 마커를 생성합니다 
+                  position: markerPosition 
+              }); 
+              // 지도에 마커를 표시합니다
+              marker.setMap(map);
+
     .comp_info.show
-      if comp_info.img
-        img.img-fluid(src= comp_info.img)
       include _comp_info
 
       .buttons
@@ -14,6 +36,7 @@ block content
             span.for-loading #[i.fa.fa-spin.fa-refresh] Loading
             span #[i.fa.fa-thumbs-up] 좋아요
           a.btn.btn-outline-dark(href=`/comp_infos/${comp_info._id}/favorite`) 즐겨찾기
+          a.btn.btn-outline-dark(href=) 신고하기
           .fb-share-button(data-layout="button" data-size="large" data-mobile-iframe="true" style="float:right")
             a.fb-xfbml-parse-ignore(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&src=sdkpreparse") 공유하기   
           if comp_info.author && comp_info.author.id == currentUser.id
