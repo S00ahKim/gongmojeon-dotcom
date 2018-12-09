@@ -47,38 +47,35 @@ module.exports = io => {
     res.render('comp_infos/new', {comp_info: {}});
   });
 
-  //- TODO: 즐찾방식 수정할 것.
-  // router.get('/:id/favorite', needAuth, catchErrors(async  (req, res, next) => {
-  //   const comp_info = await Comp_info.findById(req.params.id);
-  //   if (!comp_info) {
-  //     res.status(404).json({result: 0, message: 'not exist comp_info'});
-  //     return;
-  //   }
-  //   // req.user.favorite.push(comp_info._id);
-  //   // await req.user.save();
-    
-  //   await Favorite.create({user: req.user.id, doc: req.params.id})
-
-  //   , function(err, comp_info) {
-  //     const user = User.findById(req.user.id, function(err, user) {
-  //       user.favorite.push(comp_info._id);
-        
-  //       user.save(function(err) {
-  //         req.flash('success', '즐겨찾기에 추가되었습니다.');
-  //         res.redirect('back');
-  //       });
-  //       const favorite = Favorite.findById(req.params.id, function(err, favorite){
-  //         favorite.adder.push(user._id);
-  //         favorite.author.push(req.params.id);
-  //         favorite.comp_info.push(comp_info._id);
-  //       })
-  //     });
-  // }));
-  
   router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id);
     res.render('comp_infos/edit', {comp_info: comp_info});
   }));
+
+  //- 신고처리
+  router.get('/off', needAuth, catchErrors(async (req, res, next) => {
+    const comp_info = await Comp_info.find({off:1});
+    res.render('comp_infos/off', {comp_info: comp_info});
+  }));
+
+  //- 승인대기글
+  router.get('/waiting', needAuth, catchErrors(async (req, res, next) => {
+    const comp_info = await Comp_info.find({ulif:"wait"});
+    res.render('comp_infos/waiting', {comp_info: comp_info});
+  }));
+
+
+  //- 여기서 아이디: 글 고유 아이디, 즐겨찾기 추가할 때 씀
+  router.get('/:id/favorite', needAuth, (req, res, next) => {
+    const comp_info = Comp_info.findById(req.params.id);
+    const user = User.findById(req.user.id, function(err, user) {
+        user.favorite.push(comp_info._id);
+        user.save(function(err) {
+          req.flash('success', '즐겨찾기에 추가되었습니다.');
+          res.redirect('back');
+        });
+      });
+  });
 
   router.get('/:id', catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id).populate('author');

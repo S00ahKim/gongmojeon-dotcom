@@ -30,6 +30,7 @@ var schema = new Schema({
   //img: {type: String},  // 이미지의 path를 저장하기 위해 추가 1209:본문삽입으로 수정
   ref: {type: String},
   ulif: {type:String},
+  off: {type:Number, default:0},
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: { virtuals: true},

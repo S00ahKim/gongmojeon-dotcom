@@ -25,9 +25,8 @@
                 a.dropdown-item(href=`/users/${currentUser._id}/favorite`) 즐겨찾기
                 if (currentUser.role == "manager")
                   a.dropdown-item(href='/users') 사용자 목록
-                  a.dropdown-item(href=) 승인 대기 글
-                  a.dropdown-item(href=) 신고가 들어온 글
-                  //-TODO: 페이지 생성
+                  a.dropdown-item(href='/comp_infos/waiting') 승인 대기 글
+                  a.dropdown-item(href='/comp_infos/off') 신고가 들어온 글
             li.nav-item
               a.nav-link(href='/signout') 로그아웃
         

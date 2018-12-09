@@ -104,16 +104,17 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   const comp_info = Comp_info.findById(req.params.id);
-  const favorite = User.findById(req.params.id);
-  res.render('users/show', {user: user, comp_info:comp_info, favorite:favorite});
+  res.render('users/show', {user: user, comp_info:comp_info});
 }));
-// TODO: 1127: 이 부분 수정한 건데 왜 안 먹힐까 ^^... 1209 수정함.
 
+//-여기서 아이디: 현재 로그인된 사용자 아이디, 즐겨찾기한 목록 보려고 할 때 함. TODO 수정해라 이거 왜중복이여
 router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
-  req.user.favorite.push(comp_info._id);
-  await req.user.save();
-  res.render('user/favorite', {user:user});
+  const user = await User.findById(req.params.id);
+  var comp_info = Comp_info.find({_id: user.favorite});
+  var favorite = Comp_info.find({_id: user.favorite});
+  res.render('users/favorite', {user: user, comp_info:comp_info, favorite:favorite});
 }));
+
 
 router.post('/', catchErrors(async (req, res, next) => {
   var err = validateForm(req.body, {needPassword: true});

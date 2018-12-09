@@ -18,8 +18,10 @@ block content
           img.img-fluid.rounded-circle(src= user.facebook.photo)
 
     
-    p
+    p(style="float:right")
       a.btn.btn-outline-primary(href=`/users/${user._id}/edit`) 내 정보 수정
       | 
       a.btn.btn-outline-danger.need-confirm-btn(href=`/users/${user._id}?_method=DELETE`) 탈퇴하기
-    
+
+    br
+    br
