@@ -36,7 +36,8 @@ block content
             | 정말 이 게시글을 신고하시겠습니까?            
           .modal-footer
             button.btn.btn-secondary(type='button', data-dismiss='modal') 닫기
-            button.btn.btn-primary(type='button') 신고하기      
+            button.btn.btn-primary.off(type='button') 신고하기    
+
     if comp_info.numComments > 0
       hr
       h3 #{comp_info.numComments} 개의 댓글

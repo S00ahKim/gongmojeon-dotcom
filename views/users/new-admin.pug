@@ -6,7 +6,7 @@ block content
     h1.main-title 관리자 계정 만들기
     .container
       p 이 페이지는 관리자 계정을 만드는 페이지입니다. 일반 사용자 계정을 생성하려면 회원가입하시오.
-    form(action='/users', method='POST')
+    form(action='/users/new-admin', method='POST')
       .form-group
         label(for='name') 이름
         input.form-control(type='text', id='name', name='name', placeholder='Your name')
@@ -19,8 +19,5 @@ block content
       .form-group
         label(for='password_confirmation') 비밀번호 확인
         input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password')
-      .form-group
-        label(for='role') 역할 지정
-        input.form-control(type='text', id='role', name='role', placeholder='manager를 입력하시오')
-
+      
       button.btn.btn-primary(type='submit') 등록하기

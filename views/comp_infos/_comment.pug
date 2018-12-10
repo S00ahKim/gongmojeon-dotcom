@@ -1,16 +1,11 @@
 .comment.card
   .numbers.like-badge
     .number
-      span.number.num-votes= comp_info.numLikes
-    .button
-      a.like(href='#', data-id=comment.id)
+      span.number.num-votes= comment.numLikes
+    .button.comment-like-btn(data-id=comment.id)
         i.fa.fa-thumbs-up
         | 
         | 좋아요
-      br
-      br
-      a(href='#') 신고하기
-      //-TODO:연결수정
 
   .card-body
     .content= comment.content

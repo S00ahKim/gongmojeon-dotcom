@@ -122,6 +122,7 @@ module.exports = (app, io) => {
   // Route
   app.use('/', index);
   app.use('/users', users);
+  app.use('/comments', index);
   app.use('/comp_infos', comp_infos(io)); // socket.io를 인자로 주기 위해 function으로 변경
   require('./routes/auth')(app, passport);
   app.use('/api', require('./routes/api'));

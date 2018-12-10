@@ -11,7 +11,6 @@ const path = require('path');
 module.exports = io => {
   const router = express.Router();
   
-  // 동일한 코드가 users.js에도 있습니다. 이것은 나중에 수정합시다.
   function needAuth(req, res, next) {
     if (req.isAuthenticated()) {
       next();
@@ -73,13 +72,12 @@ module.exports = io => {
   //- 여기서 아이디: 글 고유 아이디, 즐겨찾기 추가할 때 씀
   router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id);
-    const user = await User.findById(req.user.id, function(err, user) {
-        user.favorite.push(comp_info._id);
-        user.save(function(err) {
-          req.flash('success', '즐겨찾기에 추가되었습니다.');
-          res.redirect('back');
-        });
-      });
+    const user = await User.findById(req.user.id);
+    user.favorite.push(comp_info._id);
+    user.save(function(err) {
+      req.flash('success', '즐겨찾기에 추가되었습니다.');
+      res.redirect('back');
+    });
   }));
 
   router.get('/:id', catchErrors(async (req, res, next) => {
@@ -94,12 +92,14 @@ module.exports = io => {
 
 
   router.put('/:id/edit', catchErrors(async (req, res, next) => {
+    console.log("들어옴")
     const comp_info = await Comp_info.findById(req.params.id);
 
     if (!comp_info) {
       req.flash('danger', '존재하지 않는 글입니다.');
       return res.redirect('back');
     }
+
     comp_info.title = req.body.title;
     comp_info.author = req.user._id;
     comp_info.content = req.body.content;
@@ -117,15 +117,11 @@ module.exports = io => {
     comp_info.ref = req.body.ref;
     comp_info.tags = req.body.tags.split(" ").map(e => e.trim());
     comp_info.ulif = req.body.ulif;
+    console.log("옴")
 
     await comp_info.save();
+    console.log("세이브")
     req.flash('success', '수정되었습니다.');
-    res.redirect('/comp_infos');
-  }));
-
-  router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-    await Comp_info.findOneAndRemove({_id: req.params.id});
-    req.flash('success', '삭제되었습니다.');
     res.redirect('/comp_infos');
   }));
 

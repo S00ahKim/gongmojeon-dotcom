@@ -12,8 +12,6 @@ function needAuth(req, res, next) {
     res.redirect('/signin');
   }
 }
-
-// TODO: 1118: 입력되어야 하는 정보 추가할 것 (comp_infos 에도 마찬가지)
 function validateForm(form, options) {
   var name = form.name || "";
   var email = form.email || "";
@@ -58,6 +56,7 @@ router.get('/new-admin', (req, res, next) => {
 });
 
 router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
+  console.log("에딧")
   const user = await User.findById(req.params.id);
   res.render('users/edit', {user: user});
 }));
@@ -67,6 +66,21 @@ router.get('/:id/editAdmin', needAuth, catchErrors(async (req, res, next) => {
   res.render('users/editAdmin', {user: user});
 }));
 
+router.get('/:id', catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  const comp_info = Comp_info.findById(req.params.id);
+  res.render('users/show', {user: user, comp_info:comp_info});
+}));
+
+//-여기서 아이디: 현재 로그인된 사용자 아이디, 즐겨찾기한 목록 보려고 할 때 함.
+router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  var favorites = Comp_info.find({_id: user.favorite});
+  res.render('/:id/favorite', {user: user, favorites:favorites});
+}));
+
+
+/* PUT */
 router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
   const err = validateForm(req.body);
   if (err) {
@@ -92,29 +106,29 @@ router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
   }
   await user.save();
   req.flash('success', '수정되었습니다.');
-  res.redirect('/users');
+  res.redirect('back');
 }));
 
-router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-  const user = await User.findOneAndRemove({_id: req.params.id});
-  req.flash('success', '삭제되었습니다.');
-  res.redirect('/users');
-}));
+router.put('/:id/editAdmin', needAuth, catchErrors(async (req, res, next) => {
+  console.log("여기있다")
+  const err = validateForm(req.body);
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
 
-router.get('/:id', catchErrors(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
-  const comp_info = Comp_info.findById(req.params.id);
-  res.render('users/show', {user: user, comp_info:comp_info});
-}));
+  const user = await User.findById({_id: req.params.id});
+  if (!user) {
+    req.flash('danger', '존재하지 않는 사용자입니다.');
+    return res.redirect('back');
+  }
 
-//-여기서 아이디: 현재 로그인된 사용자 아이디, 즐겨찾기한 목록 보려고 할 때 함. TODO 수정해라 이거 왜중복이여
-router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
-  var comp_info = Comp_info.find({_id: user.favorite});
-  var favorite = Comp_info.find({_id: user.favorite});
-  res.render('users/favorite', {user: user, comp_info:comp_info, favorite:favorite});
+  user.name = req.body.name;
+  user.email = req.body.email;
+  await user.save();
+  req.flash('success', '수정되었습니다.');
+  res.redirect('back');
 }));
-
 
 router.post('/', catchErrors(async (req, res, next) => {
   var err = validateForm(req.body, {needPassword: true});
@@ -136,6 +150,36 @@ router.post('/', catchErrors(async (req, res, next) => {
   await user.save();
   req.flash('success', '완료되었습니다. 로그인 해주세요.');
   res.redirect('/');
+}));
+
+router.post('/new-admin', catchErrors(async (req, res, next) => {
+  var err = validateForm(req.body, {needPassword: true});
+  if (err) {
+    req.flash('danger', err);
+    return res.redirect('back');
+  }
+  var user = await User.findOne({email: req.body.email});
+  console.log('USER???', user);
+  if (user) {
+    req.flash('danger', '이미 존재하는 이메일 주소입니다.');
+    return res.redirect('back');
+  }
+  user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    role: "manager",
+  });
+  user.password = await user.generateHash(req.body.password);
+  await user.save();
+  req.flash('success', '관리자 계정이 생성되었습니다.');
+  res.redirect('/');
+}));
+
+/* Delete */
+router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
+  const user = await User.findOneAndRemove({_id: req.params.id});
+  req.flash('success', '삭제되었습니다.');
+  res.redirect('/users');
 }));
 
 module.exports = router;

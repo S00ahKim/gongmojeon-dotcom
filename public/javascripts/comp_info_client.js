@@ -1,4 +1,4 @@
-$(function() {
+$(function() { 
   $('.comp_info-like-btn').click(function(e) {
     var $el = $(e.currentTarget); //-눌러진 부분 레퍼런스
     if ($el.hasClass('loading')) return;
@@ -43,5 +43,9 @@ $(function() {
         console.log(data, status);
       }
     });
+  });
+
+  $('.off').click(function(e) {
+    alert("접수되었습니다.")
   });
 }); 

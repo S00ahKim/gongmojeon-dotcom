@@ -16,7 +16,7 @@ router.use(catchErrors(async (req, res, next) => {
 
 router.use('/comp_infos', require('./comp_infos'));
 
-// Like for comp_info
+//-Like for comp_info
 router.post('/comp_infos/:id/like', catchErrors(async (req, res, next) => {
   const comp_info = await Comp_info.findById(req.params.id);
   if (!comp_info) {

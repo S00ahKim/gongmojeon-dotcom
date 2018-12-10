@@ -17,7 +17,7 @@ block content
             each favorite in favorites
               tr
                 td
-                  a(href=`/comp_infos/${user.favorite}`)= favorite.title
+                  a(href=`/comp_infos/${favorite._id}`)= favorite.title
                 td= comp_info.host
                 td= comp_info.contact
                 td= comp_info.tags
