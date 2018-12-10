@@ -71,16 +71,16 @@ module.exports = io => {
 
 
   //- 여기서 아이디: 글 고유 아이디, 즐겨찾기 추가할 때 씀
-  router.get('/:id/favorite', needAuth, (req, res, next) => {
-    const comp_info = Comp_info.findById(req.params.id);
-    const user = User.findById(req.user.id, function(err, user) {
+  router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
+    const comp_info = await Comp_info.findById(req.params.id);
+    const user = await User.findById(req.user.id, function(err, user) {
         user.favorite.push(comp_info._id);
         user.save(function(err) {
           req.flash('success', '즐겨찾기에 추가되었습니다.');
           res.redirect('back');
         });
       });
-  });
+  }));
 
   router.get('/:id', catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id).populate('author');
@@ -93,7 +93,7 @@ module.exports = io => {
   }));
 
 
-  router.put('/:id', catchErrors(async (req, res, next) => {
+  router.put('/:id/edit', catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.findById(req.params.id);
 
     if (!comp_info) {
@@ -117,7 +117,29 @@ module.exports = io => {
     comp_info.ref = req.body.ref;
     comp_info.tags = req.body.tags.split(" ").map(e => e.trim());
     comp_info.ulif = req.body.ulif;
-    
+
+    await comp_info.save();
+    req.flash('success', '수정되었습니다.');
+    res.redirect('/comp_infos');
+  }));
+
+  router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
+    await Comp_info.findOneAndRemove({_id: req.params.id});
+    req.flash('success', '삭제되었습니다.');
+    res.redirect('/comp_infos');
+  }));
+
+  router.put('/:id/editbyadmin', catchErrors(async (req, res, next) => {
+    const comp_info = await Comp_info.findById(req.params.id);
+
+    if (!comp_info) {
+      req.flash('danger', '존재하지 않는 글입니다.');
+      return res.redirect('back');
+    }
+    comp_info.topic = req.body.topic;
+    comp_info.applicant = req.body.applicant;
+    comp_info.ulif = req.body.ulif;
+
     await comp_info.save();
     req.flash('success', '수정되었습니다.');
     res.redirect('/comp_infos');
@@ -176,7 +198,7 @@ module.exports = io => {
       comp_info.img = "/images/uploads/" + filename;
     }
     await comp_info.save();
-    req.flash('success', 'Successfully posted');
+    req.flash('success', '등록되었습니다.');
     res.redirect('/comp_infos');
   }));
 
@@ -202,7 +224,7 @@ module.exports = io => {
     io.to(comp_info.author.toString())
       .emit('commentted', {url: url, comp_info: comp_info});
     console.log('SOCKET EMIT', comp_info.author.toString(), 'commentted', {url: url, comp_info: comp_info})
-    req.flash('success', 'Successfully commentted');
+    req.flash('success', '댓글이 등록되었습니다.');
     res.redirect(`/comp_infos/${req.params.id}`);
   }));
 
