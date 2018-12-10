@@ -52,6 +52,11 @@ module.exports = io => {
     res.render('comp_infos/edit', {comp_info: comp_info});
   }));
 
+  router.get('/:id/editbyadmin', needAuth, catchErrors(async (req, res, next) => {
+    const comp_info = await Comp_info.findById(req.params.id);
+    res.render('comp_infos/editbyadmin', {comp_info: comp_info});
+  }));
+
   //- 신고처리
   router.get('/off', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.find({off:1});
@@ -96,16 +101,23 @@ module.exports = io => {
       return res.redirect('back');
     }
     comp_info.title = req.body.title;
+    comp_info.author = req.user._id;
     comp_info.content = req.body.content;
     comp_info.topic = req.body.topic;
     comp_info.location = req.body.location;
     comp_info.location_map = req.body.location_map;
+    comp_info.lat = req.body.lat;
+    comp_info.lng = req.body.lng;
+    comp_info.start = req.body.start;
+    comp_info.end = req.body.end;
+    comp_info.applicant = req.body.applicant;
     comp_info.host = req.body.host;
     comp_info.manager = req.body.manager;
     comp_info.contact = req.body.contact;
     comp_info.ref = req.body.ref;
     comp_info.tags = req.body.tags.split(" ").map(e => e.trim());
-
+    comp_info.ulif = req.body.ulif;
+    
     await comp_info.save();
     req.flash('success', '수정되었습니다.');
     res.redirect('/comp_infos');
@@ -144,10 +156,16 @@ module.exports = io => {
       topic: req.body.topic,
       location: req.body.location,
       location_map: req.body.location_map,
+      lat: req.body.lat,
+      lng: req.body.lng,
+      start: req.body.start,
+      end: req.body.end,
+      applicant: req.body.applicant,
       host: req.body.host,
       manager: req.body.manager,
       contact: req.body.contact,
       ref: req.body.ref,
+      ulif: req.body.ulif,
       tags: req.body.tags.split(" ").map(e => e.trim()),
     });
     if (req.file) {

@@ -21,6 +21,10 @@ block content
             a.btn.btn-outline-secondary(href=`/comp_infos/${comp_info.id}/edit`) 수정
             | 
             a.btn.btn-outline-danger.need-confirm-btn(href=`/comp_infos/${comp_info.id}?_method=delete`) 삭제
+          if currentUser.role=="manager"
+            a.btn.btn-outline-secondary(href=`/comp_infos/${comp_info.id}/editbyadmin`) 관리자 권한으로 수정
+
+
     #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
       .modal-dialog(role='document')
         .modal-content

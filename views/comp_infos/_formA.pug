@@ -1,0 +1,35 @@
+.form-group
+  label(for="topic") 주제 &nbsp;
+  select.form-control(name="topic")= comp_info.topic
+    option(value="기획, 아이디어") 기획/아이디어
+    option(value="광고, 마케팅") 광고/마케팅
+    option(value="논문, 리포트") 논문/리포트
+    option(value="영상") 영상
+    option(value="사진") 사진
+    option(value="디자인") 아트/디자인
+    option(value="웹, 모바일") 웹/모바일
+    option(value="소프트웨어") 소프트웨어
+    option(value="문학, 시나리오") 문학/시나리오
+    option(value="봉사활동") 봉사활동
+    option(value="기타") 기타
+
+.form-group
+  label(for="applicant") 참가대상 &nbsp;
+  select.form-control(name="applicant")=comp_info.applicant
+    option(value="유아") 유아 (5-7세)
+    option(value="초등학생") 초등학생 (8-13세)
+    option(value="중학생") 중학생 (14-16세)
+    option(value="고등학생") 고등학생 (17-19세)
+    option(value="대학생") 대학생
+    option(value="대학원생") 대학원생
+    option(value="청소년") 청소년
+    option(value="성인") 성인
+    option(value="일반인") 일반인
+    option(value="관계없음") 관계없음
+    option(value="기타") 기타 (본문 기입 바람)
+
+.form-group
+  label(for="ulif") [참고] 이 페이지는 관리자 페이지입니다. 
+  select.form-control(name="ulif")=comp_info.ulif
+    option(value="wait") 승인 대기 게시글로 작성하기
+    option(value="upload") 바로 업로드하기
