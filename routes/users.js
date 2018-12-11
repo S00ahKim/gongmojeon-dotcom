@@ -76,12 +76,12 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   var favorites = Comp_info.find({_id: user.favorite});
-  res.render('/:id/favorite', {user: user, favorites:favorites});
+  res.render('users/favorite', {user: user, favorites:favorites});
 }));
 
 
 /* PUT */
-router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
+router.put('/:id/edit', needAuth, catchErrors(async (req, res, next) => { 
   const err = validateForm(req.body);
   if (err) {
     req.flash('danger', err);
@@ -111,9 +111,14 @@ router.put('/:id', needAuth, catchErrors(async (req, res, next) => {
 
 router.put('/:id/editAdmin', needAuth, catchErrors(async (req, res, next) => {
   console.log("여기있다")
-  const err = validateForm(req.body);
-  if (err) {
-    req.flash('danger', err);
+  //- const err = validateForm(req.body, {needPassword:true});
+  if (!req.body.name) {
+    req.flash('danger', '이름이 입력되지 않았습니다');
+    return res.redirect('back');
+  }
+
+  if (!req.body.email) {
+    req.flash('danger', '이메일이 입력되지 않았습니다');
     return res.redirect('back');
   }
 
@@ -127,7 +132,7 @@ router.put('/:id/editAdmin', needAuth, catchErrors(async (req, res, next) => {
   user.email = req.body.email;
   await user.save();
   req.flash('success', '수정되었습니다.');
-  res.redirect('back');
+  res.redirect('/users');
 }));
 
 router.post('/', catchErrors(async (req, res, next) => {

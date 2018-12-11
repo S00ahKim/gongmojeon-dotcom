@@ -4,8 +4,7 @@ block content
   .container
     h1.main-title 관리자 권한으로 수정
     p 일부 옵션을 수정할 수 있는 관리자 페이지입니다. 다른 문제가 있다면 신고/승인 방식을 활용하시오.
-    form(action=`/comp_infos/${comp_info.id}`, method="POST")
-      input(type="hidden", name="_method", value="PUT")
+    form(action=`/comp_infos/${comp_info.id}/editbyadmin?_method=PUT`, method="POST")
       include _formA
       button.btn.btn-outline-primary(type="submit") 수정
 

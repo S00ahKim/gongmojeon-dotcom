@@ -91,7 +91,7 @@ module.exports = io => {
   }));
 
 
-  router.put('/:id/edit', catchErrors(async (req, res, next) => {
+  router.put('/:id/edit', catchErrors(async (req, res, next) => { 
     console.log("들어옴")
     const comp_info = await Comp_info.findById(req.params.id);
 

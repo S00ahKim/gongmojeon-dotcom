@@ -1,9 +1,9 @@
 extends ../layout
 
-block content
+block content 
   .container 
     h1.main-title 글 수정
-    form(action=`/comp_infos/${comp_info.id}?_method=PUT`, method="POST")
+    form(action=`/comp_infos/${comp_info.id}/edit?_method=PUT`, method="POST")
       include _form
       button.btn.btn-outline-primary(type="submit") 수정
 
