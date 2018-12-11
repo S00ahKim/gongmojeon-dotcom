@@ -18,7 +18,6 @@ block content
     else
       .comp_infos
         each comp_info in comp_infos.docs
-          if comp_info.ulif=="upload"
           .comp_info
             a.title(href=`/comp_infos/${comp_info.id}`)= comp_info.title
             //-include _comp_info 게시판처럼 제목만 보이게 수정함

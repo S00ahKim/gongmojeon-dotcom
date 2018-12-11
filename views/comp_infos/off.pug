@@ -5,21 +5,21 @@ block content
     h1.main-title 신고가 들어온 글
           
     br
-    if comp_info._id
+    if comp_infos
       table.table.table-hover
         thead
           tr
             th 제목
             th 주최사
             th 연락처
-            th 태그
+            th 신고 횟수
         tbody
-            each comp_info in comp_info
+            each comp_info in comp_infos
               tr
                 td
                   a(href=`/comp_infos/${comp_info._id}`)= comp_info.title
                 td= comp_info.host
                 td= comp_info.contact
-                td= comp_info.tags
+                td= comp_info.off
     else
         p 신고가 들어온 글이 없습니다.

@@ -75,7 +75,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
 //-여기서 아이디: 현재 로그인된 사용자 아이디, 즐겨찾기한 목록 보려고 할 때 함.
 router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  var favorites = Comp_info.find({_id: user.favorite});
+  var favorites = await Comp_info.find({_id: user.favorite});
   res.render('users/favorite', {user: user, favorites:favorites});
 }));
 

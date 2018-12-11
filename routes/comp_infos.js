@@ -25,7 +25,7 @@ module.exports = io => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
 
-    var query = {};
+    var query = {ulif:{$ne:"wait"}};
     const term = req.query.term;
     if (term) {
       query = {$or: [
@@ -56,16 +56,21 @@ module.exports = io => {
     res.render('comp_infos/editbyadmin', {comp_info: comp_info});
   }));
 
+  router.get('/:id/upload', needAuth, catchErrors(async (req, res, next) => {
+    const comp_infos = await Comp_info.findById(req.params.id);
+    res.render('comp_infos/upload', {comp_infos: comp_infos});
+  }));
+
   //- 신고된 글 확인
   router.get('/off', needAuth, catchErrors(async (req, res, next) => {
-    const comp_info = await Comp_info.find({off:1});
-    res.render('comp_infos/off', {comp_info: comp_info});
+    const comp_infos = await Comp_info.find({off:{$gt:0}});
+    res.render('comp_infos/off', {comp_infos: comp_infos});
   }));
 
   //- 승인대기글 확인
   router.get('/waiting', needAuth, catchErrors(async (req, res, next) => {
-    const comp_info = await Comp_info.find({ulif:"wait"});
-    res.render('comp_infos/waiting', {comp_info: comp_info});
+    const comp_infos = await Comp_info.find({ulif:"wait"});
+    res.render('comp_infos/waiting', {comp_infos: comp_infos});
   }));
 
   // 신고 횟수 추가
@@ -87,7 +92,7 @@ module.exports = io => {
     console.log("즐찾추가");
     const comp_info = await Comp_info.findById(req.params.id);
     const user = await User.findById(req.user.id);
-    user.favorite.push(comp_info._id);
+    user.favorite = req.params.id;
     await user.save(function(err) {
       req.flash('success', '즐겨찾기에 추가되었습니다.');
       res.redirect('back');
@@ -153,6 +158,21 @@ module.exports = io => {
     await comp_info.save();
     req.flash('success', '수정되었습니다.');
     res.redirect('/comp_infos');
+  }));
+
+  router.put('/:id/upload', catchErrors(async (req, res, next) => {
+    const comp_infos = await Comp_info.findById(req.params.id);
+
+    if (!comp_infos) {
+      req.flash('danger', '존재하지 않는 글입니다.');
+      return res.redirect('back');
+    }
+    
+    comp_infos.ulif = req.body.ulif;
+
+    await comp_infos.save();
+    req.flash('success', '승인되었습니다.');
+    res.redirect('/comp_infos/waiting');
   }));
 
   router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {

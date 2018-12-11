@@ -5,7 +5,7 @@ block content
     h1.main-title 즐겨찾기
           
     br
-    if favorites._id
+    if favorites
       table.table.table-hover
         thead
           tr
@@ -18,8 +18,8 @@ block content
               tr
                 td
                   a(href=`/comp_infos/${user.favorite}`)= favorite.title
-                td= comp_info.host
-                td= comp_info.contact
-                td= comp_info.tags
+                td= favorite.host
+                td= favorite.contact
+                td= favorite.tags
     else
         p 즐겨찾기한 공모전이 없습니다.
