@@ -46,6 +46,40 @@ $(function() {
   });
 
   $('.off').click(function(e) {
-    alert("접수되었습니다.")
+    var $el = $(e.currentTarget);
+    $.ajax({
+      url: '/comp_infos/' + $el.data('id') + '/off',
+      method: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        console.log("에이젝스 접속 성공")
+      },
+      error: function(data, status) {
+        if (data.status == 401) {
+          alert('로그인이 필요합니다.');
+          location = '/signin';
+        }
+        console.log(data, status);
+      }
+    });
+  });
+
+  $('.favorite').click(function(e) {
+    var $el = $(e.currentTarget);
+    $.ajax({
+      url: '/comp_infos/' + $el.data('id') + '/favorite',
+      method: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        console.log("에이젝스 접속 성공")
+      },
+      error: function(data, status) {
+        if (data.status == 401) {
+          alert('로그인이 필요합니다.');
+          location = '/signin';
+        }
+        console.log(data, status);
+      }
+    });
   });
 }); 

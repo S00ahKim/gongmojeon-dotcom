@@ -56,25 +56,39 @@ module.exports = io => {
     res.render('comp_infos/editbyadmin', {comp_info: comp_info});
   }));
 
-  //- 신고처리
+  //- 신고된 글 확인
   router.get('/off', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.find({off:1});
     res.render('comp_infos/off', {comp_info: comp_info});
   }));
 
-  //- 승인대기글
+  //- 승인대기글 확인
   router.get('/waiting', needAuth, catchErrors(async (req, res, next) => {
     const comp_info = await Comp_info.find({ulif:"wait"});
     res.render('comp_infos/waiting', {comp_info: comp_info});
   }));
 
+  // 신고 횟수 추가
+  router.post('/:id/off', catchErrors(async (req, res, next) => {
+    console.log("신고횟수추가");
+    const comp_info = await Comp_info.findById(req.params.id);
+    if (!comp_info) {
+      return next({status: 404, msg: '존재하지 않는 글입니다.'});
+    }
+    comp_info.off++;
+    await comp_info.save(function(err){
+      req.flash('success', '신고가 접수되었습니다.');
+      res.redirect('back');
+    });
+  }));
 
-  //- 여기서 아이디: 글 고유 아이디, 즐겨찾기 추가할 때 씀
-  router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
+  //- 즐겨찾기 추가
+  router.post('/:id/favorite', catchErrors(async (req, res, next) => {
+    console.log("즐찾추가");
     const comp_info = await Comp_info.findById(req.params.id);
     const user = await User.findById(req.user.id);
     user.favorite.push(comp_info._id);
-    user.save(function(err) {
+    await user.save(function(err) {
       req.flash('success', '즐겨찾기에 추가되었습니다.');
       res.redirect('back');
     });
