@@ -22,6 +22,7 @@ block content
             a.btn.btn-outline-danger.need-confirm-btn(href=`/compInfos/${compInfo.id}?_method=delete`) 삭제
           if currentUser.role=="manager"
             a.btn.btn-outline-secondary(href=`/compInfos/${compInfo.id}/editbyadmin`) 관리자 권한으로 수정
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/compInfos/${compInfo.id}?_method=delete`) 관리자 권한으로 삭제
 
     if compInfo.numComments > 0
       hr
