@@ -1,5 +1,5 @@
-if (typeof(grecaptcha) != 'undefined'){
-  if (grecaptcha.getResponse() == ""){
+if (typeof(g-recaptcha) != 'undefined'){
+  if (g-recaptcha.getResponse() == ""){
     alert("스팸방지코드를 제대로 체크해 주세요.")
     return;
   }
