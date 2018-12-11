@@ -1,4 +1,4 @@
-// TABLE NAME : COMP_INFO (공모전 정보)
+// TABLE NAME : CompInfo (공모전 정보)
 
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
@@ -38,6 +38,6 @@ var schema = new Schema({
 });
 
 schema.plugin(mongoosePaginate);
-var Comp_info = mongoose.model('Comp_info', schema);
+var CompInfo = mongoose.model('CompInfo', schema);
 
-module.exports = Comp_info;
+module.exports = CompInfo;

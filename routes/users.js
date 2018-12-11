@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
-const Comp_info = require('../models/comp_info');
+const CompInfo = require('../models/compInfo');
 const router = express.Router();
 const catchErrors = require('../lib/async-error');
 
@@ -68,14 +68,14 @@ router.get('/:id/editAdmin', needAuth, catchErrors(async (req, res, next) => {
 
 router.get('/:id', catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  const comp_info = Comp_info.findById(req.params.id);
-  res.render('users/show', {user: user, comp_info:comp_info});
+  const compInfo = CompInfo.findById(req.params.id);
+  res.render('users/show', {user: user, compInfo:compInfo});
 }));
 
 //-여기서 아이디: 현재 로그인된 사용자 아이디, 즐겨찾기한 목록 보려고 할 때 함.
 router.get('/:id/favorite', needAuth, catchErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  var favorites = await Comp_info.find({_id: user.favorite});
+  var favorites = await CompInfo.find({_id: user.favorite});
   res.render('users/favorite', {user: user, favorites:favorites});
 }));
 

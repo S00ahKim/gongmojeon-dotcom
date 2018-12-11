@@ -13,7 +13,7 @@ var schema = new Schema({
   facebook: {id: String, token: String, photo: String},
   kakaotalk: {id: String, token: String, photo: String},
   role: {type:String},
-  favorite: [{type: Schema.Types.ObjectId, ref: 'Comp_info'}],
+  favorite: [{type: Schema.Types.ObjectId, ref: 'CompInfo'}],
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: { virtuals: true},

@@ -20,7 +20,7 @@ html
     //- this application
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/javascripts/application.js')
-    script(src='/javascripts/comp_info_client.js')
+    script(src='/javascripts/compInfo_client.js')
 
     //- socket io
     script(src='/socket.io/socket.io.js') 
@@ -65,7 +65,7 @@ html
 
       socket.on('commentted', function(data) {
         // commentted를 받으면 링크를 notifier로 출력한다.
-        var title = $('<div></div>').text(data.comp_info.title).html();
+        var title = $('<div></div>').text(data.compInfo.title).html();
         $.notify({
           icon: 'fa fa-bell',
           title: '새로운 댓글이 달렸습니다.',

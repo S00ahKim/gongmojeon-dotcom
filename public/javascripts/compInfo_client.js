@@ -1,15 +1,15 @@
 $(function() { 
-  $('.comp_info-like-btn').click(function(e) {
+  $('.compInfo-like-btn').click(function(e) {
     var $el = $(e.currentTarget); //-눌러진 부분 레퍼런스
     if ($el.hasClass('loading')) return;
     $el.addClass('loading');
     $.ajax({
-      url: '/api/comp_infos/' + $el.data('id') + '/like',
+      url: '/api/compInfos/' + $el.data('id') + '/like',
       method: 'POST',
       dataType: 'json',
       success: function(data) {
-        $('.comp_info .num-likes').text(data.numLikes);
-        $('.comp_info-like-btn').hide();
+        $('.compInfo .num-likes').text(data.numLikes);
+        $('.compInfo-like-btn').hide();
       },
       error: function(data, status) {
         if (data.status == 401) {
@@ -48,7 +48,7 @@ $(function() {
   $('.off').click(function(e) {
     var $el = $(e.currentTarget);
     $.ajax({
-      url: '/comp_infos/' + $el.data('id') + '/off',
+      url: '/compInfos/' + $el.data('id') + '/off',
       method: 'POST',
       dataType: 'json',
       success: function(data) {
@@ -67,7 +67,7 @@ $(function() {
   $('.favorite').click(function(e) {
     var $el = $(e.currentTarget);
     $.ajax({
-      url: '/comp_infos/' + $el.data('id') + '/favorite',
+      url: '/compInfos/' + $el.data('id') + '/favorite',
       method: 'POST',
       dataType: 'json',
       success: function(data) {

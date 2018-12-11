@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 var schema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
-  comp_info: { type: Schema.Types.ObjectId, ref: 'Comp_info' },
+  compInfo: { type: Schema.Types.ObjectId, ref: 'CompInfo' },
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: { virtuals: true},

@@ -1,0 +1,28 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/compInfos', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+
+    h1.main-title 
+      | 모아보기
+      if compInfos.total > 0
+        .small 총 #{compInfos.total} 개의 공모전
+
+    if compInfos.total <= 0 
+      .alert.alert-info 조회 가능한 공모전이 없습니다.
+    else
+      .compInfos
+        each compInfo in compInfos.docs
+          .compInfo
+            a.title(href=`/compInfos/${compInfo.id}`)= compInfo.title
+            //-include _compInfo 게시판처럼 제목만 보이게 수정함
+
+      +paginate(compInfos, '/compInfos', query)
+
+    hr
+    a.btn.btn-primary(href='/compInfos/new') 글쓰기

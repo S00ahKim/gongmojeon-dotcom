@@ -5,7 +5,7 @@ block content
     h1.main-title 신고가 들어온 글
           
     br
-    if comp_infos
+    if compInfos
       table.table.table-hover
         thead
           tr
@@ -14,12 +14,12 @@ block content
             th 연락처
             th 신고 횟수
         tbody
-            each comp_info in comp_infos
+            each compInfo in compInfos
               tr
                 td
-                  a(href=`/comp_infos/${comp_info._id}`)= comp_info.title
-                td= comp_info.host
-                td= comp_info.contact
-                td= comp_info.off
+                  a(href=`/compInfos/${compInfo._id}`)= compInfo.title
+                td= compInfo.host
+                td= compInfo.contact
+                td= compInfo.off
     else
         p 신고가 들어온 글이 없습니다.

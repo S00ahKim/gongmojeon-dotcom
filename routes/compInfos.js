@@ -1,5 +1,5 @@
 const express = require('express');
-const Comp_info = require('../models/comp_info');
+const CompInfo = require('../models/compInfo');
 const User = require('../models/user'); 
 const Comment = require('../models/comment');
 const catchErrors = require('../lib/async-error');
@@ -20,7 +20,7 @@ module.exports = io => {
     }
   }
 
-  /* GET comp_info listing. */
+  /* GET compInfo listing. */
   router.get('/', catchErrors(async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
@@ -34,54 +34,54 @@ module.exports = io => {
         {tags: {'$regex': term, '$options': 'i'}}
       ]};
     }
-    const comp_infos = await Comp_info.paginate(query, {
+    const compInfos = await CompInfo.paginate(query, {
       sort: {createdAt: -1}, 
       populate: 'author', 
       page: page, limit: limit
     });
-    res.render('comp_infos/index', {comp_infos: comp_infos, term: term, query: req.query});
+    res.render('compInfos/index', {compInfos: compInfos, term: term, query: req.query});
   }));
 
   router.get('/new', needAuth, (req, res, next) => {
-    res.render('comp_infos/new', {comp_info: {}});
+    res.render('compInfos/new', {compInfo: {}});
   });
 
   router.get('/:id/edit', needAuth, catchErrors(async (req, res, next) => {
-    const comp_info = await Comp_info.findById(req.params.id);
-    res.render('comp_infos/edit', {comp_info: comp_info});
+    const compInfo = await CompInfo.findById(req.params.id);
+    res.render('compInfos/edit', {compInfo: compInfo});
   }));
 
   router.get('/:id/editbyadmin', needAuth, catchErrors(async (req, res, next) => {
-    const comp_info = await Comp_info.findById(req.params.id);
-    res.render('comp_infos/editbyadmin', {comp_info: comp_info});
+    const compInfo = await CompInfo.findById(req.params.id);
+    res.render('compInfos/editbyadmin', {compInfo: compInfo});
   }));
 
   router.get('/:id/upload', needAuth, catchErrors(async (req, res, next) => {
-    const comp_infos = await Comp_info.findById(req.params.id);
-    res.render('comp_infos/upload', {comp_infos: comp_infos});
+    const compInfos = await CompInfo.findById(req.params.id);
+    res.render('compInfos/upload', {compInfos: compInfos});
   }));
 
   //- 신고된 글 확인
   router.get('/off', needAuth, catchErrors(async (req, res, next) => {
-    const comp_infos = await Comp_info.find({off:{$gt:0}});
-    res.render('comp_infos/off', {comp_infos: comp_infos});
+    const compInfos = await CompInfo.find({off:{$gt:0}});
+    res.render('compInfos/off', {compInfos: compInfos});
   }));
 
   //- 승인대기글 확인
   router.get('/waiting', needAuth, catchErrors(async (req, res, next) => {
-    const comp_infos = await Comp_info.find({ulif:"wait"});
-    res.render('comp_infos/waiting', {comp_infos: comp_infos});
+    const compInfos = await CompInfo.find({ulif:"wait"});
+    res.render('compInfos/waiting', {compInfos: compInfos});
   }));
 
   // 신고 횟수 추가
   router.post('/:id/off', catchErrors(async (req, res, next) => {
     console.log("신고횟수추가");
-    const comp_info = await Comp_info.findById(req.params.id);
-    if (!comp_info) {
+    const compInfo = await CompInfo.findById(req.params.id);
+    if (!compInfo) {
       return next({status: 404, msg: '존재하지 않는 글입니다.'});
     }
-    comp_info.off++;
-    await comp_info.save(function(err){
+    compInfo.off++;
+    await compInfo.save(function(err){
       req.flash('success', '신고가 접수되었습니다.');
       res.redirect('back');
     });
@@ -90,7 +90,7 @@ module.exports = io => {
   //- 즐겨찾기 추가
   router.post('/:id/favorite', catchErrors(async (req, res, next) => {
     console.log("즐찾추가");
-    const comp_info = await Comp_info.findById(req.params.id);
+    const compInfo = await CompInfo.findById(req.params.id);
     const user = await User.findById(req.user.id);
     user.favorite = req.params.id;
     await user.save(function(err) {
@@ -100,85 +100,85 @@ module.exports = io => {
   }));
 
   router.get('/:id', catchErrors(async (req, res, next) => {
-    const comp_info = await Comp_info.findById(req.params.id).populate('author');
-    const comments = await Comment.find({comp_info: comp_info.id}).populate('author');
-    comp_info.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
+    const compInfo = await CompInfo.findById(req.params.id).populate('author');
+    const comments = await Comment.find({compInfo: compInfo.id}).populate('author');
+    compInfo.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
 
-    await comp_info.save();
-    res.render('comp_infos/show', {comp_info: comp_info, comments: comments});
-    res.render('index', {comp_info: comp_info, comments: comments});
+    await compInfo.save();
+    res.render('compInfos/show', {compInfo: compInfo, comments: comments});
+    res.render('index', {compInfo: compInfo, comments: comments});
   }));
 
 
   router.put('/:id/edit', catchErrors(async (req, res, next) => { 
     console.log("들어옴")
-    const comp_info = await Comp_info.findById(req.params.id);
+    const compInfo = await CompInfo.findById(req.params.id);
 
-    if (!comp_info) {
+    if (!compInfo) {
       req.flash('danger', '존재하지 않는 글입니다.');
       return res.redirect('back');
     }
 
-    comp_info.title = req.body.title;
-    comp_info.author = req.user._id;
-    comp_info.content = req.body.content;
-    comp_info.topic = req.body.topic;
-    comp_info.location = req.body.location;
-    comp_info.location_map = req.body.location_map;
-    comp_info.lat = req.body.lat;
-    comp_info.lng = req.body.lng;
-    comp_info.start = req.body.start;
-    comp_info.end = req.body.end;
-    comp_info.applicant = req.body.applicant;
-    comp_info.host = req.body.host;
-    comp_info.manager = req.body.manager;
-    comp_info.contact = req.body.contact;
-    comp_info.ref = req.body.ref;
-    comp_info.tags = req.body.tags.split(" ").map(e => e.trim());
-    comp_info.ulif = req.body.ulif;
+    compInfo.title = req.body.title;
+    compInfo.author = req.user._id;
+    compInfo.content = req.body.content;
+    compInfo.topic = req.body.topic;
+    compInfo.location = req.body.location;
+    compInfo.location_map = req.body.location_map;
+    compInfo.lat = req.body.lat;
+    compInfo.lng = req.body.lng;
+    compInfo.start = req.body.start;
+    compInfo.end = req.body.end;
+    compInfo.applicant = req.body.applicant;
+    compInfo.host = req.body.host;
+    compInfo.manager = req.body.manager;
+    compInfo.contact = req.body.contact;
+    compInfo.ref = req.body.ref;
+    compInfo.tags = req.body.tags.split(" ").map(e => e.trim());
+    compInfo.ulif = req.body.ulif;
     console.log("옴")
 
-    await comp_info.save();
+    await compInfo.save();
     console.log("세이브")
     req.flash('success', '수정되었습니다.');
-    res.redirect('/comp_infos');
+    res.redirect('/compInfos');
   }));
 
   router.put('/:id/editbyadmin', catchErrors(async (req, res, next) => {
-    const comp_info = await Comp_info.findById(req.params.id);
+    const compInfo = await CompInfo.findById(req.params.id);
 
-    if (!comp_info) {
+    if (!compInfo) {
       req.flash('danger', '존재하지 않는 글입니다.');
       return res.redirect('back');
     }
-    comp_info.topic = req.body.topic;
-    comp_info.applicant = req.body.applicant;
-    comp_info.ulif = req.body.ulif;
+    compInfo.topic = req.body.topic;
+    compInfo.applicant = req.body.applicant;
+    compInfo.ulif = req.body.ulif;
 
-    await comp_info.save();
+    await compInfo.save();
     req.flash('success', '수정되었습니다.');
-    res.redirect('/comp_infos');
+    res.redirect('/compInfos');
   }));
 
   router.put('/:id/upload', catchErrors(async (req, res, next) => {
-    const comp_infos = await Comp_info.findById(req.params.id);
+    const compInfos = await CompInfo.findById(req.params.id);
 
-    if (!comp_infos) {
+    if (!compInfos) {
       req.flash('danger', '존재하지 않는 글입니다.');
       return res.redirect('back');
     }
     
-    comp_infos.ulif = req.body.ulif;
+    compInfos.ulif = req.body.ulif;
 
-    await comp_infos.save();
+    await compInfos.save();
     req.flash('success', '승인되었습니다.');
-    res.redirect('/comp_infos/waiting');
+    res.redirect('/compInfos/waiting');
   }));
 
   router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
-    await Comp_info.findOneAndRemove({_id: req.params.id});
+    await CompInfo.findOneAndRemove({_id: req.params.id});
     req.flash('success', '삭제되었습니다.');
-    res.redirect('/comp_infos');
+    res.redirect('/compInfos');
   }));
 
 
@@ -201,7 +201,7 @@ module.exports = io => {
   router.post('/', needAuth, 
         upload.single('img'), // img라는 필드를 req.file로 저장함.
         catchErrors(async (req, res, next) => {
-    var comp_info = new Comp_info({
+    var compInfo = new CompInfo({
       title: req.body.title,
       author: req.user._id,
       content: req.body.content,
@@ -223,39 +223,39 @@ module.exports = io => {
     if (req.file) {
       const dest = path.join(__dirname, '../public/images/uploads/');  // 옮길 디렉토리
       console.log("File ->", req.file); // multer의 output이 어떤 형태인지 보자.
-      const filename = comp_info.id + "/" + req.file.originalname;
+      const filename = compInfo.id + "/" + req.file.originalname;
       await fs.move(req.file.path, dest + filename);
-      comp_info.img = "/images/uploads/" + filename;
+      compInfo.img = "/images/uploads/" + filename;
     }
-    await comp_info.save();
+    await compInfo.save();
     req.flash('success', '등록되었습니다.');
-    res.redirect('/comp_infos');
+    res.redirect('/compInfos');
   }));
 
   router.post('/:id/comments', needAuth, catchErrors(async (req, res, next) => {
     const user = req.user;
-    const comp_info = await Comp_info.findById(req.params.id);
+    const compInfo = await CompInfo.findById(req.params.id);
 
-    if (!comp_info) {
+    if (!compInfo) {
       req.flash('danger', '존재하지 않는 글입니다.');
       return res.redirect('back');
     }
 
     var comment = new Comment({
       author: user._id,
-      comp_info: comp_info._id,
+      compInfo: compInfo._id,
       content: req.body.content
     });
     await comment.save();
-    comp_info.numComments++;
-    await comp_info.save();
+    compInfo.numComments++;
+    await compInfo.save();
 
-    const url = `/comp_infos/${comp_info._id}#${comment._id}`;
-    io.to(comp_info.author.toString())
-      .emit('commentted', {url: url, comp_info: comp_info});
-    console.log('SOCKET EMIT', comp_info.author.toString(), 'commentted', {url: url, comp_info: comp_info})
+    const url = `/compInfos/${compInfo._id}#${comment._id}`;
+    io.to(compInfo.author.toString())
+      .emit('commentted', {url: url, compInfo: compInfo});
+    console.log('SOCKET EMIT', compInfo.author.toString(), 'commentted', {url: url, compInfo: compInfo})
     req.flash('success', '댓글이 등록되었습니다.');
-    res.redirect(`/comp_infos/${req.params.id}`);
+    res.redirect(`/compInfos/${req.params.id}`);
   }));
 
   return router;

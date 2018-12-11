@@ -98,20 +98,20 @@ a:hover {
     margin: 1em 0; }
 
 
-/*Comp_info*/
+/*CompInfo*/
 .main-title .small {
   float: right;
   font-size: 1rem;
   color: black; }
 
-.comp_info {
+.compInfo {
   line-height: 160%;
   margin-bottom: 1em; }
-  .comp_info .title {
+  .compInfo .title {
     font-size: 1.3rem; }
-  .comp_info .content {
+  .compInfo .content {
     color: black; }
-  .comp_info .tags {
+  .compInfo .tags {
     margin: 0.5em 0; }
 
 .author {
@@ -128,7 +128,7 @@ a:hover {
   font-weight: bold;
   color: darkgray; }
 
-.comp_infos .content {
+.compInfos .content {
   max-height: 5em;
   overflow: hidden;
   text-overflow: ellipsis; }
@@ -167,18 +167,18 @@ table.info-table{
 #centerAddr {display:block;margin-top:2px;font-weight: normal;}
 .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 
-.comp_info-like-btn, .comment-like-btn {
+.compInfo-like-btn, .comment-like-btn {
   cursor: pointer; }
-.comp_info-like-btn .for-loading, .comment-like-btn .for-loading {
+.compInfo-like-btn .for-loading, .comment-like-btn .for-loading {
     display: none; }  
-.comp_info-like-btn.loading, .comment-like-btn.loading {
+.compInfo-like-btn.loading, .comment-like-btn.loading {
     filter: opacity(30%);
     cursor: wait; }
-.comp_info-like-btn.loading > span, .comment-like-btn.loading > span {
+.compInfo-like-btn.loading > span, .comment-like-btn.loading > span {
       display: none; }
-.comp_info-like-btn.loading .for-loading, .comment-like-btn.loading .for-loading {
+.compInfo-like-btn.loading .for-loading, .comment-like-btn.loading .for-loading {
       display: inline-block; }
-.comp_info-like-btn.disabled, .comment-like-btn.disabled {
+.compInfo-like-btn.disabled, .comment-like-btn.disabled {
     color: #bbb;
     cursor: default; }
 

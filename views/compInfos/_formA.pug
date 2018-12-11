@@ -1,6 +1,6 @@
 .form-group
   label(for="topic") 주제 &nbsp;
-  select.form-control(name="topic")= comp_info.topic
+  select.form-control(name="topic")= compInfo.topic
     option(value="기획, 아이디어") 기획/아이디어
     option(value="광고, 마케팅") 광고/마케팅
     option(value="논문, 리포트") 논문/리포트
@@ -15,7 +15,7 @@
 
 .form-group
   label(for="applicant") 참가대상 &nbsp;
-  select.form-control(name="applicant")=comp_info.applicant
+  select.form-control(name="applicant")=compInfo.applicant
     option(value="유아") 유아 (5-7세)
     option(value="초등학생") 초등학생 (8-13세)
     option(value="중학생") 중학생 (14-16세)
@@ -30,6 +30,6 @@
 
 .form-group
   label(for="ulif") [참고] 이 페이지는 관리자 페이지입니다. 
-  select.form-control(name="ulif")=comp_info.ulif
+  select.form-control(name="ulif")=compInfo.ulif
     option(value="wait") 승인 대기 게시글로 작성하기
     option(value="upload") 바로 업로드하기

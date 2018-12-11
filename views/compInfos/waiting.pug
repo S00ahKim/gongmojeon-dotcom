@@ -5,7 +5,7 @@ block content
     h1.main-title 승인 대기 중인 글
           
     br
-    if comp_infos
+    if compInfos
       table.table.table-hover
         thead
           tr
@@ -14,13 +14,13 @@ block content
             th 연락처
             th 
         tbody
-            each a in comp_infos
+            each a in compInfos
               tr
                 td
-                  a(href=`/comp_infos/${a._id}`)= a.title
+                  a(href=`/compInfos/${a._id}`)= a.title
                 td= a.host
                 td= a.contact
                 td
-                  a(href=`/comp_infos/${a._id}/upload`) 승인하기
+                  a(href=`/compInfos/${a._id}/upload`) 승인하기
     else
         p 승인 대기 중인 글이 없습니다.

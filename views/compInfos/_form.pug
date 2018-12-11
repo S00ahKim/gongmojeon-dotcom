@@ -1,11 +1,11 @@
 .form-group
   label(for="title") 제목
-  input.form-control(type="text", name="title", placeholder="공모전 이름", value=comp_info.title)
+  input.form-control(type="text", name="title", placeholder="공모전 이름", value=compInfo.title)
 
 
 .form-group
   label(for="topic") 주제 &nbsp;
-  select.form-control(name="topic")= comp_info.topic
+  select.form-control(name="topic")= compInfo.topic
     option(value="기획, 아이디어") 기획/아이디어
     option(value="광고, 마케팅") 광고/마케팅
     option(value="논문, 리포트") 논문/리포트
@@ -20,19 +20,19 @@
 
 .form-group
   label(for="host") 주최사
-  input.form-control(type="text", name="host", placeholder="주최사", value=comp_info.host)
+  input.form-control(type="text", name="host", placeholder="주최사", value=compInfo.host)
 
 .form-group
   label(for="manager") 담당자
-  input.form-control(type="text", name="manager", placeholder="담당자/부서명", value=comp_info.manager)
+  input.form-control(type="text", name="manager", placeholder="담당자/부서명", value=compInfo.manager)
 
 .form-group
   label(for="contact") 연락처
-  input.form-control(type="text", name="contact", placeholder="연락처", value=comp_info.contact)
+  input.form-control(type="text", name="contact", placeholder="연락처", value=compInfo.contact)
 
 .form-group
   label(for="location") 장소
-  input.form-control(type="text", name="location", placeholder="특정한 개최 장소가 있을 경우 입력해 주세요.", value=comp_info.location)
+  input.form-control(type="text", name="location", placeholder="특정한 개최 장소가 있을 경우 입력해 주세요.", value=compInfo.location)
 
 .form-group
   label(for="location") Location
@@ -44,10 +44,10 @@
     #map(style='width:100%;height:100%;position:relative;overflow:hidden;')
     |     
   .hAddr  
-    input.form-control(type="text", id="location_map",name="location_map", value=comp_info.location_map)
+    input.form-control(type="text", id="location_map",name="location_map", value=compInfo.location_map)
   .hAddr    
-    input.form-control(type="text", id="lat",name="lat", value=comp_info.lat)        
-    input.form-control(type="text", id="lng",name="lng", value=comp_info.lng)        
+    input.form-control(type="text", id="lat",name="lat", value=compInfo.lat)        
+    input.form-control(type="text", id="lng",name="lng", value=compInfo.lng)        
     span#centerAddr
       script(type='text/javascript', src='//dapi.kakao.com/v2/maps/sdk.js?appkey=7235e7c57191d55774b383b2856384b2&libraries=services')
       script.
@@ -111,15 +111,15 @@
 
 .form-group
   label(for="start") 시작일자
-  input.form-control(type="date", name="start", value=comp_info.start)
+  input.form-control(type="date", name="start", value=compInfo.start)
 
 .form-group
   label(for="end") 마감일자
-  input.form-control(type="date", name="end", value=comp_info.end)
+  input.form-control(type="date", name="end", value=compInfo.end)
 
 .form-group
   label(for="applicant") 참가대상 &nbsp;
-  select.form-control(name="applicant")=comp_info.applicant
+  select.form-control(name="applicant")=compInfo.applicant
     option(value="유아") 유아 (5-7세)
     option(value="초등학생") 초등학생 (8-13세)
     option(value="중학생") 중학생 (14-16세)
@@ -134,20 +134,20 @@
 
 .form-group
   label(for="content") 본문
-  textarea(name="content", style="display:none")= comp_info.content
+  textarea(name="content", style="display:none")= compInfo.content
   .summernote
 
 .form-group
   label(for="ref") 참고할 만한 자료가 있다면 기입해주세요.
-  input.form-control(type="text", name="ref", placeholder="참고자료", value=comp_info.ref)
+  input.form-control(type="text", name="ref", placeholder="참고자료", value=compInfo.ref)
 
 .form-group
   label(for="tags") 태그
-  input.form-control(type="text", name="tags", placeholder="스페이스 바로 태그를 분리합니다.", value=comp_info.tags ? comp_info.tags.join(" ") : "")
+  input.form-control(type="text", name="tags", placeholder="스페이스 바로 태그를 분리합니다.", value=compInfo.tags ? compInfo.tags.join(" ") : "")
 
 .form-group
   label(for="ulif") 모든 글은 관리자의 승인을 받아 게시됩니다.
-  select.form-control(name="ulif")=comp_info.ulif
+  select.form-control(name="ulif")=compInfo.ulif
     option(value="wait") 승인 대기 게시글로 작성하기
     if currentUser.role == "manager"
       option(value="upload") 바로 업로드하기

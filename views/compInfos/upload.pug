@@ -4,10 +4,10 @@ block content
   .container
     h1.main-title 승인하기
     p 해당 게시글을 승인하시겠습니까?
-    form(action=`/comp_infos/${comp_infos.id}/upload?_method=PUT`, method="POST")
+    form(action=`/compInfos/${compInfos.id}/upload?_method=PUT`, method="POST")
       .form-group
         label(for="ulif")  
-        select.form-control(name="ulif")=comp_infos.ulif
+        select.form-control(name="ulif")=compInfos.ulif
             option(value="upload") 업로드하기
       button.btn.btn-outline-primary(type="submit") 승인
 

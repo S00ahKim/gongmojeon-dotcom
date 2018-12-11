@@ -1,5 +1,5 @@
 const express = require('express');
-const Comp_info = require('../../models/comp_info'); 
+const CompInfo = require('../../models/compInfo'); 
 const Comment = require('../../models/comment'); 
 const LikeLog = require('../../models/like-log'); 
 const catchErrors = require('../../lib/async-error');
@@ -14,23 +14,23 @@ router.use(catchErrors(async (req, res, next) => {
   }
 }));
 
-router.use('/comp_infos', require('./comp_infos'));
+router.use('/compInfos', require('./compInfos'));
 
-//-Like for comp_info
-router.post('/comp_infos/:id/like', catchErrors(async (req, res, next) => {
-  const comp_info = await Comp_info.findById(req.params.id);
-  if (!comp_info) {
+//-Like for compInfo
+router.post('/compInfos/:id/like', catchErrors(async (req, res, next) => {
+  const compInfo = await CompInfo.findById(req.params.id);
+  if (!compInfo) {
     return next({status: 404, msg: '존재하지 않는 글입니다.'});
   }
-  var likeLog = await LikeLog.findOne({author: req.user._id, comp_info: comp_info._id});
+  var likeLog = await LikeLog.findOne({author: req.user._id, compInfo: compInfo._id});
   if (!likeLog) {
-    comp_info.numLikes++;
+    compInfo.numLikes++;
     await Promise.all([
-      comp_info.save(),
-      LikeLog.create({author: req.user._id, comp_info: comp_info._id})
+      compInfo.save(),
+      LikeLog.create({author: req.user._id, compInfo: compInfo._id})
     ]);
   }
-  return res.json(comp_info);
+  return res.json(compInfo);
 }));
 
 // Like for comment

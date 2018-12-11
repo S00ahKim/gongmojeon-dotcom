@@ -1,30 +1,30 @@
 table.info_table
   tr 
     th 분야
-    td.smallText=comp_info.topic
+    td.smallText=compInfo.topic
     th 주최사
-    td.smallText=comp_info.host
+    td.smallText=compInfo.host
     th 대상
-    td.smallText=comp_info.applicant
+    td.smallText=compInfo.applicant
 
   tr  
     th 담당자
-    td.smallText=comp_info.manager
+    td.smallText=compInfo.manager
     th 연락처
-    td.smallText=comp_info.contact
+    td.smallText=compInfo.contact
     th 장소
-    td.smallText=comp_info.location
+    td.smallText=compInfo.location
 
   tr
     th 시작일자
-    td.smallText=comp_info.start
+    td.smallText=compInfo.start
     th 마감일자
-    td.smallText=comp_info.end
+    td.smallText=compInfo.end
 
-if comp_info.location_map
-  .smallText!= comp_info.location_map
-  .smallText#lat(data-value=comp_info.lat)= comp_info.lat 
-  .smallText#lng(data-value=comp_info.lng)= comp_info.lng
+if compInfo.location_map
+  .smallText!= compInfo.location_map
+  .smallText#lat(data-value=compInfo.lat)= compInfo.lat 
+  .smallText#lng(data-value=compInfo.lng)= compInfo.lng
   .map_wrap
     #map(style='width:100%;height:100%;position:relative;overflow:hidden;')
       |      
@@ -51,27 +51,27 @@ if comp_info.location_map
           map.setZoomable(false); 
 
 
-.content !{comp_info.content}
+.content !{compInfo.content}
 
 
 br
 br
 p(style= "font-weight: bold") 참고
-.content=comp_info.ref
+.content=compInfo.ref
 
 .tags.badges
-  each tag in comp_info.tags 
+  each tag in compInfo.tags 
     span.badge.badge-phill.badge-secondary= tag
     | 
 .row
   .col-sm
     .numbers.
-      #[span.number.num-votes= comp_info.numLikes] 좋아요,
-      #[span.number.num-comments= comp_info.numComments] 댓글,
-      #[span.number.num-views= comp_info.numReads] 조회
+      #[span.number.num-votes= compInfo.numLikes] 좋아요,
+      #[span.number.num-comments= compInfo.numComments] 댓글,
+      #[span.number.num-views= compInfo.numReads] 조회
   .col-sm
     .author
-      | 글작성시간 #{moment(comp_info.createdAt).format('YYYY-MM-DD')}
-      if comp_info.author
+      | 글작성시간 #{moment(compInfo.createdAt).format('YYYY-MM-DD')}
+      if compInfo.author
         | 
-        | by #[a(href=`/users/${comp_info.author.id}`)= comp_info.author.name] 
+        | by #[a(href=`/users/${compInfo.author.id}`)= compInfo.author.name] 
