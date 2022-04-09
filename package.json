@@ -21,7 +21,7 @@
     "fs-extra": "^4.0.3",
     "http-errors": "^1.6.3",
     "method-override": "^2.3.10",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "mongodb-stitch-browser-sdk": "^4.1.1",
     "mongoose": "4.1.9",
     "mongoose-paginate": "^5.0.3",
